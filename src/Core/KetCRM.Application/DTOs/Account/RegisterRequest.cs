@@ -10,10 +10,13 @@ namespace KetCRM.Application.DTOs.Account
     public class RegisterRequest
     {
         [Required]
-        public string FirstName { get; set; }
+        public string Name { get; set; }
 
         [Required]
-        public string LastName { get; set; }
+        public string Surname { get; set; }
+
+        [Required]
+        public string Patronymic { get; set; }
 
         [Required]
         [EmailAddress]
