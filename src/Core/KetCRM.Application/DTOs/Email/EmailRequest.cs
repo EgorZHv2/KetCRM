@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace KetCRM.Application.DTOs.Email
 {
-    public interface EmailRequest
+    public class EmailRequest
     {
-        Task SendAsync(EmailRequest request);
+        public string To { get; set; }
+        public string Subject { get; set; }
+        public string Body { get; set; }
+        public string From { get; set; }
     }
 }
