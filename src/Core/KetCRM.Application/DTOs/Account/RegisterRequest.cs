@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace KetCRM.Application.DTOs.Account
 {
@@ -24,6 +26,9 @@ namespace KetCRM.Application.DTOs.Account
         [Required]
         [MinLength(6)]
         public string Login { get; set; }
+
+        [Required]
+        public IFormFile UploadedFile { get; set; }
 
         [Required]
         [MinLength(6)]

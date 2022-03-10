@@ -24,16 +24,19 @@ namespace KetCRM.Infrastructure.Identity.Services
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly JWTSettings _jwtSettings;
+        private readonly IImageReader _imageReader;
         private readonly IDateTimeService _dateTimeService;
         public AccountService(UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
             IOptions<JWTSettings> jwtSettings,
+            IImageReader imageReader,
             IDateTimeService dateTimeService,
             SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _jwtSettings = jwtSettings.Value;
+            _imageReader = imageReader;
             _dateTimeService = dateTimeService;
             _signInManager = signInManager;
         }
@@ -82,6 +85,11 @@ namespace KetCRM.Infrastructure.Identity.Services
                 Patronymic = request.Patronymic,
                 UserName = request.Login
             };
+
+            if (request.UploadedFile != null)
+            {
+                user.Image = _imageReader.ReadImage(request.UploadedFile);
+            }
 
             var userWithSameEmail = await _userManager.FindByEmailAsync(request.Email);
             if (userWithSameEmail == null)

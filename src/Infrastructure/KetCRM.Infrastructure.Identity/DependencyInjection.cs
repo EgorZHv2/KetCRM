@@ -37,6 +37,7 @@ namespace KetCRM.Infrastructure.Identity
 
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders();
             services.AddTransient<IDateTimeService, DateTimeService>();
+            services.AddTransient<IImageReader, ImageReader>();
             #region Services
             services.AddTransient<IAccountService, AccountService>();
             #endregion
