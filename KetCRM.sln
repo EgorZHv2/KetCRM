@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{9A0D8DBB-019D-41C1-BF77-2725E5D4E504}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KetCRM.Application", "src\Core\KetCRM.Application\KetCRM.Application.csproj", "{B8D2C082-23CC-4402-B9A2-CF9653B010B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KetCRM.Application", "src\Core\KetCRM.Application\KetCRM.Application.csproj", "{B8D2C082-23CC-4402-B9A2-CF9653B010B9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KetCRM.WebApi", "src\WebApi\KetCRM.WebApi\KetCRM.WebApi.csproj", "{F5B4F4F0-545E-4768-A4F6-29D4CC14A6F9}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KetCRM.Infrastructure.Identity", "src\Infrastructure\KetCRM.Infrastructure.Identity\KetCRM.Infrastructure.Identity.csproj", "{6BCE56BA-A86B-4596-BA8A-B77F1A34A492}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KetCRM.Infrastructure.Persistence", "src\Infrastructure\KetCRM.Infrastructure.Persistence\KetCRM.Infrastructure.Persistence.csproj", "{B011472E-25FC-4F52-B71B-885F2166ACDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KetCRM.Infrastructure.Shared", "src\Infrastructure\KetCRM.Infrastructure.Shared\KetCRM.Infrastructure.Shared.csproj", "{07498A7F-29FC-4896-8C30-88D26336D475}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{B011472E-25FC-4F52-B71B-885F2166ACDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B011472E-25FC-4F52-B71B-885F2166ACDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B011472E-25FC-4F52-B71B-885F2166ACDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07498A7F-29FC-4896-8C30-88D26336D475}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07498A7F-29FC-4896-8C30-88D26336D475}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07498A7F-29FC-4896-8C30-88D26336D475}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07498A7F-29FC-4896-8C30-88D26336D475}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{CA449D47-B229-45E5-89BE-FF5442A3A426} = {B3A8E236-49CA-4800-B199-BE64C5CE5740}
 		{6BCE56BA-A86B-4596-BA8A-B77F1A34A492} = {4AC60B95-4909-4582-B01A-6B7641D97488}
 		{B011472E-25FC-4F52-B71B-885F2166ACDD} = {4AC60B95-4909-4582-B01A-6B7641D97488}
+		{07498A7F-29FC-4896-8C30-88D26336D475} = {4AC60B95-4909-4582-B01A-6B7641D97488}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A807EBC1-327D-4E3D-A3A4-679A55C4C4FF}
