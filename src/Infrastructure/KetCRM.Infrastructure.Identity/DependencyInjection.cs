@@ -22,8 +22,19 @@ namespace KetCRM.Infrastructure.Identity
     {
         public static void AddIdentityInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<IdentityContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("IdentityConnection")));
+            if (configuration.GetValue<bool>("UseInMemoryDatabase"))
+            {
+                services.AddDbContext<IdentityContext>(options =>
+                    options.UseInMemoryDatabase("IdentityDb"));
+            }
+            else
+            {
+                services.AddDbContext<IdentityContext>(options =>
+                options.UseSqlServer(
+                    configuration.GetConnectionString("IdentityConnection"),
+                    b => b.MigrationsAssembly(typeof(IdentityContext).Assembly.FullName)));
+            }
+
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders();
             services.AddTransient<IDateTimeService, DateTimeService>();
             #region Services

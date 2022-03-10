@@ -50,21 +50,20 @@ namespace KetCRM.Infrastructure.Identity.Services
             {
                 throw new ApiException($"Invalid Credentials for '{request.Email}'.");
             }
+
             JwtSecurityToken jwtSecurityToken = await GenerateJWToken(user);
 
+            AuthenticationResponse response = new AuthenticationResponse();
+            response.Id = user.Id;
+            response.JWToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+            response.Email = user.Email;
+            response.UserName = user.UserName;
             var rolesList = await _userManager.GetRolesAsync(user).ConfigureAwait(false);
+            response.Roles = rolesList.ToList();
+            response.IsVerified = user.EmailConfirmed;
             var refreshToken = GenerateRefreshToken(ipAddress);
+            response.RefreshToken = refreshToken.Token;
 
-            AuthenticationResponse response = new AuthenticationResponse()
-            {
-                Id = user.Id,
-                JWToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
-                Email = user.Email,
-                UserName = user.UserName,
-                Roles = rolesList.ToList(),
-                IsVerified = user.EmailConfirmed,
-                RefreshToken = refreshToken.Token,
-            };
             return new Response<AuthenticationResponse>(response, $"Authenticated {user.UserName}");
         }
 

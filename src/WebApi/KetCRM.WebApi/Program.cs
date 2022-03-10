@@ -1,6 +1,7 @@
 using KetCRM.Infrastructure.Identity;
 using KetCRM.Infrastructure.Identity.Contexts;
 using KetCRM.Infrastructure.Identity.Models;
+using KetCRM.Infrastructure.Identity.Seeds;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +31,27 @@ using (var serviceScope = app.Services.CreateScope())
     {
         var logger = services.GetRequiredService<ILogger<Program>>();
         logger.LogError(exception, "An error occured while app initialization");
+    }
+}
+
+using (var serviceScope = app.Services.CreateScope())
+{
+    var services = serviceScope.ServiceProvider;
+
+    try
+    {
+        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+        await DefaultRoles.SeedAsync(userManager, roleManager);
+    }
+    catch (Exception ex)
+    {
+        // Log.Warning(ex, "An error occurred seeding the DB");
+    }
+    finally
+    {
+        // Log.CloseAndFlush();
     }
 }
 
