@@ -57,7 +57,7 @@ namespace KetCRM.Infrastructure.Identity.Services
             response.Id = user.Id;
             response.JWToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
             response.Email = user.Email;
-            response.UserName = user.UserName;
+            response.Login = user.UserName;
             var rolesList = await _userManager.GetRolesAsync(user).ConfigureAwait(false);
             response.Roles = rolesList.ToList();
             response.IsVerified = user.EmailConfirmed;
@@ -69,10 +69,10 @@ namespace KetCRM.Infrastructure.Identity.Services
 
         public async Task<Response<string>> RegisterAsync(RegisterRequest request, string origin)
         {
-            var userWithSameUserName = await _userManager.FindByNameAsync(request.UserName);
+            var userWithSameUserName = await _userManager.FindByNameAsync(request.Login);
             if (userWithSameUserName != null)
             {
-                throw new ApiException($"Username '{request.UserName}' is already taken.");
+                throw new ApiException($"Username '{request.Login}' is already taken.");
             }
             var user = new ApplicationUser
             {
@@ -80,7 +80,7 @@ namespace KetCRM.Infrastructure.Identity.Services
                 Name = request.Name,
                 Surname = request.Surname,
                 Patronymic = request.Patronymic,
-                UserName = request.UserName
+                UserName = request.Login
             };
 
             var userWithSameEmail = await _userManager.FindByEmailAsync(request.Email);

@@ -23,7 +23,7 @@ namespace KetCRM.Application.DTOs.Account
         public string Email { get; set; }
         [Required]
         [MinLength(6)]
-        public string UserName { get; set; }
+        public string Login { get; set; }
 
         [Required]
         [MinLength(6)]
