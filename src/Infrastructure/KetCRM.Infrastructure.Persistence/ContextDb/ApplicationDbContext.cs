@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using KetCRM.Domain.Entities;
+using KetCRM.Application.Common.Interfaces;
 
 namespace KetCRM.Infrastructure.Persistence.ContextDb
 {
-    public partial class ApplicationContext : DbContext
+    public partial class ApplicationDbContext : DbContext,IApplicationDbContext
     {
-        public ApplicationContext()
+        public ApplicationDbContext()
         {
         }
 
-        public ApplicationContext(DbContextOptions<ApplicationContext> options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
@@ -36,7 +37,7 @@ namespace KetCRM.Infrastructure.Persistence.ContextDb
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("server=Computer\\server; Trusted_connection=true; Database=KetCrmDb");
+                //optionsBuilder.UseSqlServer("server=Computer\\server; Trusted_connection=true; Database=KetCrmDb"); Старый путь БД
             }
         }
 
@@ -271,5 +272,10 @@ namespace KetCRM.Infrastructure.Persistence.ContextDb
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await base.SaveChangesAsync();
+        }
     }
 }

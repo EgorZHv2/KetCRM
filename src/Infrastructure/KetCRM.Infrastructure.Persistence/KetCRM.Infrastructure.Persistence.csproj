@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\KetCRM.Application\KetCRM.Application.csproj" />
     <ProjectReference Include="..\..\Core\KetCRM.Domain\KetCRM.Domain.csproj" />
   </ItemGroup>
 

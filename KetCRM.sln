@@ -15,15 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{9A0D8DBB-019D-41C1-BF77-2725E5D4E504}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KetCRM.Application", "src\Core\KetCRM.Application\KetCRM.Application.csproj", "{B8D2C082-23CC-4402-B9A2-CF9653B010B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KetCRM.Application", "src\Core\KetCRM.Application\KetCRM.Application.csproj", "{B8D2C082-23CC-4402-B9A2-CF9653B010B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KetCRM.WebApi", "src\WebApi\KetCRM.WebApi\KetCRM.WebApi.csproj", "{F5B4F4F0-545E-4768-A4F6-29D4CC14A6F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KetCRM.WebApi", "src\WebApi\KetCRM.WebApi\KetCRM.WebApi.csproj", "{F5B4F4F0-545E-4768-A4F6-29D4CC14A6F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KetCRM.Domain", "src\Core\KetCRM.Domain\KetCRM.Domain.csproj", "{CA449D47-B229-45E5-89BE-FF5442A3A426}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KetCRM.Domain", "src\Core\KetCRM.Domain\KetCRM.Domain.csproj", "{CA449D47-B229-45E5-89BE-FF5442A3A426}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KetCRM.Infrastructure.Identity", "src\Infrastructure\KetCRM.Infrastructure.Identity\KetCRM.Infrastructure.Identity.csproj", "{6BCE56BA-A86B-4596-BA8A-B77F1A34A492}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KetCRM.Infrastructure.Identity", "src\Infrastructure\KetCRM.Infrastructure.Identity\KetCRM.Infrastructure.Identity.csproj", "{6BCE56BA-A86B-4596-BA8A-B77F1A34A492}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KetCRM.Infrastructure.Persistence", "src\Infrastructure\KetCRM.Infrastructure.Persistence\KetCRM.Infrastructure.Persistence.csproj", "{B011472E-25FC-4F52-B71B-885F2166ACDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KetCRM.Infrastructure.Persistence", "src\Infrastructure\KetCRM.Infrastructure.Persistence\KetCRM.Infrastructure.Persistence.csproj", "{B011472E-25FC-4F52-B71B-885F2166ACDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
