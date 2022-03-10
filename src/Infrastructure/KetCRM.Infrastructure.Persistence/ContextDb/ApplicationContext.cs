@@ -6,13 +6,13 @@ using KetCRM.Domain.Entities;
 
 namespace KetCRM.Infrastructure.Persistence.ContextDb
 {
-    public partial class KetCrmDbContext : DbContext
+    public partial class ApplicationContext : DbContext
     {
-        public KetCrmDbContext()
+        public ApplicationContext()
         {
         }
 
-        public KetCrmDbContext(DbContextOptions<KetCrmDbContext> options)
+        public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {
         }
