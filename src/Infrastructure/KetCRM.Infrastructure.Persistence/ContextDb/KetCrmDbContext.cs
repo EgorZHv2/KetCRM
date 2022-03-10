@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using KetCRM.Domain.Entities;
 
-namespace KetCRM.Domain.Entities
+namespace KetCRM.Infrastructure.Persistence.ContextDb
 {
     public partial class KetCrmDbContext : DbContext
     {
