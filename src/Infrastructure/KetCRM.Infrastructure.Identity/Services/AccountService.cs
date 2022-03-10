@@ -50,10 +50,6 @@ namespace KetCRM.Infrastructure.Identity.Services
             {
                 throw new ApiException($"Invalid Credentials for '{request.Email}'.");
             }
-            if (!user.EmailConfirmed)
-            {
-                throw new ApiException($"Account Not Confirmed for '{request.Email}'.");
-            }
             JwtSecurityToken jwtSecurityToken = await GenerateJWToken(user);
 
             var rolesList = await _userManager.GetRolesAsync(user).ConfigureAwait(false);

@@ -1,4 +1,5 @@
 using KetCRM.Infrastructure.Identity;
+using KetCRM.Infrastructure.Identity.Contexts;
 using KetCRM.Infrastructure.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 
@@ -16,6 +17,22 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+using (var serviceScope = app.Services.CreateScope())
+{
+    var services = serviceScope.ServiceProvider;
+
+    try
+    {
+        var context = services.GetRequiredService<IdentityContext>();
+        DbInitializer.Initialize(context);
+    }
+    catch (Exception exception)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(exception, "An error occured while app initialization");
+    }
+}
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -26,6 +43,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
