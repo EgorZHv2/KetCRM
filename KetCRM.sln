@@ -25,7 +25,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KetCRM.Infrastructure.Ident
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KetCRM.Infrastructure.Persistence", "src\Infrastructure\KetCRM.Infrastructure.Persistence\KetCRM.Infrastructure.Persistence.csproj", "{B011472E-25FC-4F52-B71B-885F2166ACDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KetCRM.Infrastructure.Shared", "src\Infrastructure\KetCRM.Infrastructure.Shared\KetCRM.Infrastructure.Shared.csproj", "{07498A7F-29FC-4896-8C30-88D26336D475}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KetCRM.Infrastructure.Shared", "src\Infrastructure\KetCRM.Infrastructure.Shared\KetCRM.Infrastructure.Shared.csproj", "{07498A7F-29FC-4896-8C30-88D26336D475}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{DF7ACB30-C5B4-4568-809D-2EA5D95026B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KetCRM.BlazorClient", "KetCRM.BlazorClient\KetCRM.BlazorClient.csproj", "{BB3382DF-363B-4B0F-B3BF-31AD70E4958B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,10 @@ Global
 		{07498A7F-29FC-4896-8C30-88D26336D475}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07498A7F-29FC-4896-8C30-88D26336D475}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07498A7F-29FC-4896-8C30-88D26336D475}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB3382DF-363B-4B0F-B3BF-31AD70E4958B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB3382DF-363B-4B0F-B3BF-31AD70E4958B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB3382DF-363B-4B0F-B3BF-31AD70E4958B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB3382DF-363B-4B0F-B3BF-31AD70E4958B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +79,8 @@ Global
 		{6BCE56BA-A86B-4596-BA8A-B77F1A34A492} = {4AC60B95-4909-4582-B01A-6B7641D97488}
 		{B011472E-25FC-4F52-B71B-885F2166ACDD} = {4AC60B95-4909-4582-B01A-6B7641D97488}
 		{07498A7F-29FC-4896-8C30-88D26336D475} = {4AC60B95-4909-4582-B01A-6B7641D97488}
+		{DF7ACB30-C5B4-4568-809D-2EA5D95026B9} = {0DAB406F-E0DF-456A-AA4A-5B24A1C60930}
+		{BB3382DF-363B-4B0F-B3BF-31AD70E4958B} = {DF7ACB30-C5B4-4568-809D-2EA5D95026B9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A807EBC1-327D-4E3D-A3A4-679A55C4C4FF}
