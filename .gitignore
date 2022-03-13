@@ -361,5 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/src/Client/KetCRM.BlazorClient/wwwroot/css/mdb
 /src/Client/KetCRM.BlazorClient/wwwroot/js/mdb
-/src/Client/KetCRM.BlazorClient/wwwroot
