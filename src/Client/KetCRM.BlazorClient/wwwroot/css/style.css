@@ -39,3 +39,7 @@
     border-radius: 100%;
     overflow: hidden;
 }
+
+.modal-link-a:hover{
+    cursor: pointer;
+}
