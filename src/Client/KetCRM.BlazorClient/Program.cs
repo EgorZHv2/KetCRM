@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped(sp =>
     new HttpClient
     {
-        BaseAddress = new Uri("https://localhost:7033/")
+        BaseAddress = new Uri(builder.Configuration["BaseAddress"])
     });
 
 builder.Services.AddRazorPages();
