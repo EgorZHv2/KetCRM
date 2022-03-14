@@ -10,4 +10,8 @@
     <Folder Include="Data\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\KetCRM.Application\KetCRM.Application.csproj" />
+  </ItemGroup>
+
 </Project>

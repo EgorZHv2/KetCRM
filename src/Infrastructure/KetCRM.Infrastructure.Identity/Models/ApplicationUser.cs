@@ -13,7 +13,6 @@ namespace KetCRM.Infrastructure.Identity.Models
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Patronymic { get; set; }
-        public byte[] Image { get; set; }
         public List<RefreshToken> RefreshTokens { get; set; }
         public bool OwnsToken(string token)
         {

@@ -28,9 +28,6 @@ namespace KetCRM.Application.DTOs.Account
         public string Login { get; set; }
 
         [Required]
-        public IFormFile UploadedFile { get; set; }
-
-        [Required]
         [MinLength(6)]
         public string Password { get; set; }
 
