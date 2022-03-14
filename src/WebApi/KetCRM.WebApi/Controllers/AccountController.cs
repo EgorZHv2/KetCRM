@@ -24,6 +24,11 @@ namespace KetCRM.WebApi.Controllers
             var origin = Request.Headers["origin"];
             return Ok(await _accountService.RegisterAsync(request, origin));
         }
+        [HttpGet("getAllUser")]
+        public async Task<IActionResult> AuthenticateUserList()
+        {
+            return Ok(await _accountService.AuthenticateUserList());
+        }
         private string GenerateIPAddress()
         {
             if (Request.Headers.ContainsKey("X-Forwarded-For"))

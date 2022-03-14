@@ -15,6 +15,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Security.Cryptography;
+using System.Diagnostics;
 
 namespace KetCRM.Infrastructure.Identity.Services
 {
@@ -53,6 +54,7 @@ namespace KetCRM.Infrastructure.Identity.Services
             {
                 throw new ApiException($"Invalid Credentials for '{request.Email}'.");
             }
+            
 
             JwtSecurityToken jwtSecurityToken = await GenerateJWToken(user);
 
@@ -66,6 +68,8 @@ namespace KetCRM.Infrastructure.Identity.Services
             response.IsVerified = user.EmailConfirmed;
             var refreshToken = GenerateRefreshToken(ipAddress);
             response.RefreshToken = refreshToken.Token;
+
+            user.LastLogin = DateTime.UtcNow;
 
             return new Response<AuthenticationResponse>(response, $"Authenticated {user.UserName}");
         }
@@ -83,7 +87,7 @@ namespace KetCRM.Infrastructure.Identity.Services
                 Name = request.Name,
                 Surname = request.Surname,
                 Patronymic = request.Patronymic,
-                UserName = request.Login
+                UserName = request.Login,
             };
 
             //if (request.UploadedFile != null)
@@ -109,6 +113,31 @@ namespace KetCRM.Infrastructure.Identity.Services
             {
                 throw new ApiException($"Email {request.Email } is already registered.");
             }
+        }
+
+        public async Task<UserListVM> AuthenticateUserList()
+        {
+            UserListVM users = new UserListVM();
+
+            users.Lists = (from userItem in _userManager.Users
+                           select new UserListDto
+                           {
+                               Id = userItem.Id,
+                               Name = userItem.Name,
+                               Surname = userItem.Surname,
+                               Patronymic = userItem.Patronymic,
+                               Login = userItem.UserName,
+                               LastLogin = (userItem.LastLogin).ToString(),
+                               Email = userItem.Email,
+                           }).ToList();
+
+            foreach (var item in users.Lists)
+            {
+                var entity = await _userManager.FindByIdAsync(item.Id);
+                item.Roles = string.Join("; ", await _userManager.GetRolesAsync(entity));
+            }
+
+            return users;
         }
 
         private async Task<JwtSecurityToken> GenerateJWToken(ApplicationUser user)

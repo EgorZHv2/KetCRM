@@ -3,13 +3,14 @@ using Microsoft.AspNetCore.Components.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
+
 builder.Services.AddScoped(sp =>
     new HttpClient
     {
-        BaseAddress = new Uri(builder.Configuration["BaseAddress"])
+        BaseAddress = new Uri("https://localhost:7033/")
     });
 
-// Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
