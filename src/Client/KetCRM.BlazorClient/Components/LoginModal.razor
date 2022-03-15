@@ -34,7 +34,6 @@
 
     private async Task HandleLogin()
     {
-        await JS.InvokeVoidAsync("xhrSimulate");
         var result = await AccountService.Login(user);
         NavigationManager.NavigateTo("/");
     }
