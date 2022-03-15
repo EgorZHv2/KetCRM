@@ -1,0 +1,41 @@
+﻿@using KetCRM.BlazorClient.Models
+@using System.Net.Http
+@using System.Net.Http.Json
+@using KetCRM.BlazorClient.Services.Interfaces.Account
+@inject IAccountService AccountService
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JS
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Авторизация</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <input type="email" @bind="user.Email" class="form-control gray-color" placeholder="Почта">
+                <input type="password" @bind="user.Password" class="form-control gray-color mt-3" placeholder="Пароль">
+                <div class="form-check mt-3">
+                  <input class="form-check-input round-input" type="checkbox" value="" id="flexCheckDefault" />
+                  <label class="form-check-label" for="flexCheckDefault">Запомнить</label>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button @onclick="HandleLogin" type="button" class="btn btn-info">Войти</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+@code {
+    private LoginVM user = new LoginVM();
+    private string Error = "";
+
+    private async Task HandleLogin()
+    {
+        await JS.InvokeVoidAsync("xhrSimulate");
+        var result = await AccountService.Login(user);
+        NavigationManager.NavigateTo("/");
+    }
+}

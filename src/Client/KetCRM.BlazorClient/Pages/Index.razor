@@ -4,6 +4,16 @@
 
 <h1>Hello, world!</h1>
 
+<AuthorizeView>
+    <Authorized>
+        <p>You can only see this content if you're authorized.</p>
+    </Authorized>
+    <NotAuthorized>
+        <h1>Authentication Failure!</h1>
+        <p>You're not signed in.</p>
+    </NotAuthorized>
+</AuthorizeView>
+
 Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />

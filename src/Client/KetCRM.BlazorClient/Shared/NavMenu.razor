@@ -1,4 +1,7 @@
-﻿<!-- Navbar -->
+﻿@using KetCRM.BlazorClient.Components
+@using Microsoft.AspNetCore.Components.Authorization;
+
+<!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <!-- Container wrapper -->
     <div class="container-fluid">
@@ -28,8 +31,11 @@
 
       <!-- Right elements -->
       <div class="d-flex align-items-center">
-
-        <ul class="navbar-nav">
+         
+        </div>
+        <AuthorizeView>
+        <Authorized>
+       <ul class="navbar-nav">
           <!-- Avatar -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownMenuLink"
@@ -45,12 +51,17 @@
                 <a class="dropdown-item" href="#">Мои профиль</a>
               </li>
               <li>
-                <a class="dropdown-item" href="#">Выйти</a>
+                <a class="dropdown-item" href="logout">Выйти</a>
               </li>
             </ul>
           </li>
         </ul>
-        </div>
+        </Authorized>
+        <NotAuthorized>
+             <button class="btn btn-info" data-mdb-toggle="modal" data-mdb-target="#loginModal">Войти</button>
+        </NotAuthorized>
+        </AuthorizeView>
+        <LoginModal></LoginModal>
         <!-- Right elements -->
       </div>
       <!-- Container wrapper -->

@@ -36,6 +36,7 @@ namespace KetCRM.Infrastructure.Identity
             }
 
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders();
+            services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IDateTimeService, DateTimeService>();
             services.AddTransient<IImageReader, ImageReader>();
             services.Configure<JWTSettings>(configuration.GetSection("JWTSettings"));

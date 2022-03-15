@@ -42,7 +42,7 @@ namespace KetCRM.Infrastructure.Identity.Services
             _signInManager = signInManager;
         }
 
-        public async Task<Response<AuthenticationResponse>> AuthenticateAsync(AuthenticationRequest request, string ipAddress)
+        public async Task<AuthenticationResponse> AuthenticateAsync(AuthenticationRequest request, string ipAddress)
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
             if (user == null)
@@ -71,7 +71,7 @@ namespace KetCRM.Infrastructure.Identity.Services
 
             user.LastLogin = DateTime.UtcNow;
 
-            return new Response<AuthenticationResponse>(response, $"Authenticated {user.UserName}");
+            return response;
         }
 
         public async Task<Response<string>> RegisterAsync(RegisterRequest request, string origin)
