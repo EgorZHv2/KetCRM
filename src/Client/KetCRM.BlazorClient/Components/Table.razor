@@ -3,52 +3,60 @@
 @using System.Net.Http.Json
 @inject HttpClient Http
   
-
-<div id="datatable" class="datatable">
+@{
+    if(loading)
+    {
+        <div class="d-flex justify-content-center mt-4">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    }
+    else
+    {
+        
+    
+    <div id="datatable" class="datatable">
             <div class="datatable-inner table-responsive ps" style="overflow: auto; position: relative;">
-              <table class="table datatable-table">
-                <thead class="datatable-header">
-                  <tr>
+                <table class="table datatable-table">
+                    <thead class="datatable-header">
+                        <tr>
 
-                    <th style="cursor: pointer;" scope="col">ID</th>
-                    <th style="cursor: pointer;" scope="col">Логин</th>
-                    <th style="cursor: pointer;" scope="col">Почта</th>
-                    <th style="cursor: pointer;" scope="col">Роль</th>
-                    <th style="cursor: pointer;" scope="col">Фамилия</th>
-                    <th style="cursor: pointer;" scope="col">Имя</th>
-                    <th style="cursor: pointer;" scope="col">Отчество</th>
-                    <th style="cursor: pointer;" scope="col">Последний логин</th>
-                    <th style="cursor: pointer;" scope="col"></th>
-                  </tr>
-                </thead>
-                <tbody class="datatable-body">
-                    @{
-                    if (users.Lists == null)
-                    {
-                        <span class="mx-auto">Данных нет</span>
-                    }
+                            <th style="cursor: pointer;" scope="col">ID</th>
+                            <th style="cursor: pointer;" scope="col">Логин</th>
+                            <th style="cursor: pointer;" scope="col">Почта</th>
+                            <th style="cursor: pointer;" scope="col">Роль</th>
+                            <th style="cursor: pointer;" scope="col">Фамилия</th>
+                            <th style="cursor: pointer;" scope="col">Имя</th>
+                            <th style="cursor: pointer;" scope="col">Отчество</th>
+                            <th style="cursor: pointer;" scope="col">Последний логин</th>
+                            <th style="cursor: pointer;" scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="datatable-body">
+                        @{
 
-                    foreach (var item in users.Lists)
-                        {
-                            <tr scope="row" data-mdb-index="0">
-                                <td data-mdb-field="field_0" false="">@item.Id</td>
-                                <td data-mdb-field="field_1" false="">@item.Login</td>
-                                <td data-mdb-field="field_2" false="">@item.Email</td>
-                                <td data-mdb-field="field_3" false="">@item.Roles</td>
-                                <td data-mdb-field="field_1" false="">@item.Surname</td>
-                                <td data-mdb-field="field_2" false="">@item.Name</td>
-                                <td data-mdb-field="field_3" false="">@item.Patronymic</td>
-                                <td data-mdb-field="field_4" false="">@item.LastLogin</td>
-                                <td data-mdb-field="field_5 mx-auto" false="">
-                                    <a class="link-dark h6 modal-link-a"><i class="fas fa-user-edit" data-mdb-toggle="modal"
+                            foreach (var item in users.Lists)
+                            {
+                                <tr scope="row" data-mdb-index="0">
+                                    <td data-mdb-field="field_0" false="">@item.Id</td>
+                                    <td data-mdb-field="field_1" false="">@item.Login</td>
+                                    <td data-mdb-field="field_2" false="">@item.Email</td>
+                                    <td data-mdb-field="field_3" false="">@item.Roles</td>
+                                    <td data-mdb-field="field_1" false="">@item.Surname</td>
+                                    <td data-mdb-field="field_2" false="">@item.Name</td>
+                                    <td data-mdb-field="field_3" false="">@item.Patronymic</td>
+                                    <td data-mdb-field="field_4" false="">@item.LastLogin</td>
+                                    <td data-mdb-field="field_5 mx-auto" false="">
+                                        <a class="link-dark h6 modal-link-a"><i class="fas fa-user-edit" data-mdb-toggle="modal"
                           Data-mdb-target="#changeModal"></i></a>
-                                    <span class="m-2"></span>
-                                    <a class="link-dark h6"><i class="fas fa-trash " data-mdb-toggle="modal"
+                                        <span class="m-2"></span>
+                                        <a class="link-dark h6"><i class="fas fa-trash " data-mdb-toggle="modal"
                           data-mdb-target="#trashModal"></i></a>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            }
                         }
-                    }
 
                 </tbody>
               </table>
@@ -61,10 +69,18 @@
             </div>
 
           </div>
+          }
+}
 
 @code {
     private UserListVM? users = new UserListVM();
+    private bool loading;
 
-    protected override async Task OnInitializedAsync() => 
+    protected override async Task OnInitializedAsync()
+    {
+        loading = true;
         users = await Http.GetFromJsonAsync<UserListVM>("api/Account/GetAllUser");
+        loading = false;
+    }
+
 }
