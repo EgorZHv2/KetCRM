@@ -69,7 +69,8 @@ namespace KetCRM.Infrastructure.Identity.Services
             var refreshToken = GenerateRefreshToken(ipAddress);
             response.RefreshToken = refreshToken.Token;
 
-            user.LastLogin = DateTime.UtcNow;
+            user.LastLogin = DateTime.Now;
+            await _userManager.UpdateAsync(user);
 
             return response;
         }
@@ -127,7 +128,7 @@ namespace KetCRM.Infrastructure.Identity.Services
                                Surname = userItem.Surname,
                                Patronymic = userItem.Patronymic,
                                Login = userItem.UserName,
-                               LastLogin = (userItem.LastLogin).ToString(),
+                               LastLogin = (userItem.LastLogin).ToString("G"),
                                Email = userItem.Email,
                            }).ToList();
 
