@@ -155,6 +155,51 @@ namespace KetCRM.Infrastructure.Identity.Services
             return userId;
         }
 
+        public async Task<UserListDto> GetUserById(string userId)
+        {
+            ApplicationUser user = await _userManager.FindByIdAsync(userId);
+
+            var role = (await _userManager.GetRolesAsync(user)).ToString();
+            UserListDto userDto = new UserListDto()
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Surname = user.Surname,
+                Patronymic = user.Patronymic,
+                Email = user.Email,
+                Login = user.UserName,
+                Roles = role ?? Roles.Basic.ToString()
+            };
+
+            return userDto;
+        }
+
+        public async Task<UserListDto> UpdateUserById(UserListDto request, string userId)
+        {
+            ApplicationUser user = await _userManager.FindByIdAsync(userId);
+
+            if(user != null)
+            {
+                var oldRole = _userManager.GetRolesAsync(user);
+
+                user.Name = request.Name;
+                user.Surname = request.Surname;
+                user.Patronymic = request.Patronymic;
+                user.UserName = request.Login;
+                user.Email = request.Email;
+                
+                if(oldRole.ToString() != request.Roles)
+                {
+                    await _userManager.RemoveFromRoleAsync(user, oldRole.ToString());
+                    await _userManager.AddToRoleAsync(user, request.Roles);
+                }
+
+                await _userManager.UpdateAsync(user);
+            }
+
+            return request;
+        }
+
         private async Task<JwtSecurityToken> GenerateJWToken(ApplicationUser user)
         {
             var userClaims = await _userManager.GetClaimsAsync(user);

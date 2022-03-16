@@ -14,5 +14,7 @@ namespace KetCRM.Application.Interfaces.Account
         Task<Response<string>> RegisterAsync(RegisterRequest request, string origin);
         Task<UserListVM> AuthenticateUserList();
         Task<string> DeleteUser(string userId);
+        Task<UserListDto> UpdateUserById(UserListDto request, string userId);
+        Task<UserListDto> GetUserById(string userId);
     }
 }

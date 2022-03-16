@@ -35,6 +35,16 @@ namespace KetCRM.WebApi.Controllers
         {
             return Ok(await _accountService.DeleteUser(Id));
         }
+        [HttpGet("getUserById/{Id}")]
+        public async Task<IActionResult> GetUserById([Required] string Id)
+        {
+            return Ok(await _accountService.GetUserById(Id));
+        }
+        [HttpPut("updateUserById/{Id}")]
+        public async Task<IActionResult> UpdateUserById([Required] string Id, UserListDto dto)
+        {
+            return Ok(await _accountService.UpdateUserById(dto, Id));
+        }
         private string GenerateIPAddress()
         {
             if (Request.Headers.ContainsKey("X-Forwarded-For"))
