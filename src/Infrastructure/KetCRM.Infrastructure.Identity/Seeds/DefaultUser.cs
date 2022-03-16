@@ -11,6 +11,11 @@ namespace KetCRM.Infrastructure.Identity.Seeds
 {
     public class DefaultUser
     {
+        /// <summary>
+        /// Пользователь с максимальным уровнем доступа
+        /// </summary>
+        /// <param name="userManager"></param>
+        /// <param name="roleManager"></param>
         public static async Task SeedAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             var defaultUser = new ApplicationUser

@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace KetCRM.Infrastructure.Identity.Seeds
 {
+    /// <summary>
+    /// Набор стандартных ролей
+    /// </summary>
     public static class DefaultRoles
     {
         public static async Task SeedAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
