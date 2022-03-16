@@ -62,6 +62,8 @@ namespace KetCRM.Infrastructure.Identity.Services
             response.Id = user.Id;
             response.JWToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
             response.Email = user.Email;
+            response.Name = user.Name;
+            response.Surname = user.Surname;
             response.Login = user.UserName;
             var rolesList = await _userManager.GetRolesAsync(user).ConfigureAwait(false);
             response.Roles = rolesList.ToList();
@@ -102,7 +104,7 @@ namespace KetCRM.Infrastructure.Identity.Services
                 var result = await _userManager.CreateAsync(user, request.Password);
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, Roles.Basic.ToString());
+                    await _userManager.AddToRoleAsync(user, ((Roles)request.Roles).ToString());
                     return new Response<string>(user.Id, message: $"User Registered.");
                 }
                 else
@@ -141,6 +143,18 @@ namespace KetCRM.Infrastructure.Identity.Services
             return users;
         }
 
+        public async Task<string> DeleteUser(string userId)
+        {
+            ApplicationUser user = await _userManager.FindByIdAsync(userId);
+
+            if(user != null)
+            {
+                await _userManager.DeleteAsync(user);
+            }
+
+            return userId;
+        }
+
         private async Task<JwtSecurityToken> GenerateJWToken(ApplicationUser user)
         {
             var userClaims = await _userManager.GetClaimsAsync(user);
@@ -161,7 +175,9 @@ namespace KetCRM.Infrastructure.Identity.Services
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim("uid", user.Id),
-                new Claim("ip", ipAddress)
+                new Claim("ip", ipAddress),
+                new Claim(JwtRegisteredClaimNames.Name, user.Name),
+                new Claim(JwtRegisteredClaimNames.FamilyName, user.Surname)
             }
             .Union(userClaims)
             .Union(roleClaims);

@@ -32,7 +32,7 @@ namespace KetCRM.BlazorClient.Services.Account
             var loginAsJson = JsonSerializer.Serialize(loginModel);
             var response = await _httpClient.PostAsync("api/Account/Authenticate", new StringContent(loginAsJson, Encoding.UTF8, "application/json"));
             var loginResult = JsonSerializer.Deserialize<AuthenticationResponse>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
+          
             if (!response.IsSuccessStatusCode)
             {
                 return loginResult;

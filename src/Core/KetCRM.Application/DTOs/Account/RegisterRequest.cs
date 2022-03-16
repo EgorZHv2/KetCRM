@@ -34,5 +34,8 @@ namespace KetCRM.Application.DTOs.Account
         [Required]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        public int Roles { get; set; }
     }
 }

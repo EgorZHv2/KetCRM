@@ -1,6 +1,7 @@
 ﻿using KetCRM.Application.DTOs.Account;
 using KetCRM.Application.Interfaces.Account;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace KetCRM.WebApi.Controllers
 {
@@ -28,6 +29,11 @@ namespace KetCRM.WebApi.Controllers
         public async Task<IActionResult> AuthenticateUserList()
         {
             return Ok(await _accountService.AuthenticateUserList());
+        }
+        [HttpDelete("deleteUser/{Id}")]
+        public async Task<IActionResult> DeleteUser([Required] string Id)
+        {
+            return Ok(await _accountService.DeleteUser(Id));
         }
         private string GenerateIPAddress()
         {

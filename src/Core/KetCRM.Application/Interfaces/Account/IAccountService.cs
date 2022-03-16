@@ -13,5 +13,6 @@ namespace KetCRM.Application.Interfaces.Account
         Task<AuthenticationResponse> AuthenticateAsync(AuthenticationRequest request, string ipAddress);
         Task<Response<string>> RegisterAsync(RegisterRequest request, string origin);
         Task<UserListVM> AuthenticateUserList();
+        Task<string> DeleteUser(string userId);
     }
 }

@@ -2,74 +2,75 @@
 @using System.Net.Http
 @using System.Net.Http.Json
 @inject HttpClient Http
-  
+
 @{
-    if(loading)
-    {
-        <div class="d-flex justify-content-center mt-4">
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
+if(loading)
+{
+<div class="d-flex justify-content-center mt-4">
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+}
+else
+{
+
+
+<div id="datatable" class="datatable">
+    <div class="datatable-inner table-responsive ps" style="overflow: auto; position: relative;">
+        <table class="table datatable-table">
+            <thead class="datatable-header">
+                <tr>
+
+                    <th style="cursor: pointer;" scope="col">ID</th>
+                    <th style="cursor: pointer;" scope="col">Логин</th>
+                    <th style="cursor: pointer;" scope="col">Почта</th>
+                    <th style="cursor: pointer;" scope="col">Роль</th>
+                    <th style="cursor: pointer;" scope="col">Фамилия</th>
+                    <th style="cursor: pointer;" scope="col">Имя</th>
+                    <th style="cursor: pointer;" scope="col">Отчество</th>
+                    <th style="cursor: pointer;" scope="col">Последний логин</th>
+                    <th style="cursor: pointer;" scope="col"></th>
+                </tr>
+            </thead>
+            <tbody class="datatable-body">
+                @{
+
+                foreach (var item in users.Lists)
+                {
+                <tr scope="row" data-mdb-index="0">
+                    <td data-mdb-field="field_0" false="">@item.Id</td>
+                    <td data-mdb-field="field_1" false="">@item.Login</td>
+                    <td data-mdb-field="field_2" false="">@item.Email</td>
+                    <td data-mdb-field="field_3" false="">@item.Roles</td>
+                    <td data-mdb-field="field_1" false="">@item.Surname</td>
+                    <td data-mdb-field="field_2" false="">@item.Name</td>
+                    <td data-mdb-field="field_3" false="">@item.Patronymic</td>
+                    <td data-mdb-field="field_4" false="">@item.LastLogin</td>
+                    <td data-mdb-field="field_5 mx-auto" false="">
+                        <a class="link-dark h6 modal-link-a"><i class="fas fa-user-edit" data-mdb-toggle="modal"
+                                Data-mdb-target="#changeModal"></i></a>
+                        <span class="m-2"></span>
+                        <a class="link-dark h6"><i class="fas fa-trash " data-mdb-toggle="modal"
+                                data-mdb-target="#trashModal"></i></a>
+                    </td>
+                </tr>
+                <DeleteModal Id=@item.Id></DeleteModal>
+                }
+                }
+
+            </tbody>
+        </table>
+        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+            <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
         </div>
-    }
-    else
-    {
-        
-    
-    <div id="datatable" class="datatable">
-            <div class="datatable-inner table-responsive ps" style="overflow: auto; position: relative;">
-                <table class="table datatable-table">
-                    <thead class="datatable-header">
-                        <tr>
+        <div class="ps__rail-y" style="top: 0px; right: 0px;">
+            <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div>
+        </div>
+    </div>
 
-                            <th style="cursor: pointer;" scope="col">ID</th>
-                            <th style="cursor: pointer;" scope="col">Логин</th>
-                            <th style="cursor: pointer;" scope="col">Почта</th>
-                            <th style="cursor: pointer;" scope="col">Роль</th>
-                            <th style="cursor: pointer;" scope="col">Фамилия</th>
-                            <th style="cursor: pointer;" scope="col">Имя</th>
-                            <th style="cursor: pointer;" scope="col">Отчество</th>
-                            <th style="cursor: pointer;" scope="col">Последний логин</th>
-                            <th style="cursor: pointer;" scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody class="datatable-body">
-                        @{
-
-                            foreach (var item in users.Lists)
-                            {
-                                <tr scope="row" data-mdb-index="0">
-                                    <td data-mdb-field="field_0" false="">@item.Id</td>
-                                    <td data-mdb-field="field_1" false="">@item.Login</td>
-                                    <td data-mdb-field="field_2" false="">@item.Email</td>
-                                    <td data-mdb-field="field_3" false="">@item.Roles</td>
-                                    <td data-mdb-field="field_1" false="">@item.Surname</td>
-                                    <td data-mdb-field="field_2" false="">@item.Name</td>
-                                    <td data-mdb-field="field_3" false="">@item.Patronymic</td>
-                                    <td data-mdb-field="field_4" false="">@item.LastLogin</td>
-                                    <td data-mdb-field="field_5 mx-auto" false="">
-                                        <a class="link-dark h6 modal-link-a"><i class="fas fa-user-edit" data-mdb-toggle="modal"
-                          Data-mdb-target="#changeModal"></i></a>
-                                        <span class="m-2"></span>
-                                        <a class="link-dark h6"><i class="fas fa-trash " data-mdb-toggle="modal"
-                          data-mdb-target="#trashModal"></i></a>
-                                    </td>
-                                </tr>
-                            }
-                        }
-
-                </tbody>
-              </table>
-              <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
-              </div>
-              <div class="ps__rail-y" style="top: 0px; right: 0px;">
-                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div>
-              </div>
-            </div>
-
-          </div>
-          }
+</div>
+}
 }
 
 @code {
@@ -82,5 +83,4 @@
         users = await Http.GetFromJsonAsync<UserListVM>("api/Account/GetAllUser");
         loading = false;
     }
-
 }

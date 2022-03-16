@@ -1,7 +1,8 @@
 ﻿@page "/user"
+
 @using KetCRM.BlazorClient.Components
 
- <ModalRegister></ModalRegister>
+ <RegisterModal></RegisterModal>
 
 <div class="row mt-4 mb-3">
       <div class="col-6 h4">
@@ -27,28 +28,10 @@
             </div>
           </div>
           <Table></Table>
-          <div class="modal fade" id="trashModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Удаление пользователя</h5>
-                  <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <span>Вы действительно хотите удалить пользователя?</span>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger">Удалить</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <ModalRegister></ModalRegister>
         </section>
 
 
       </div>
     </section>
-
 @code {
 }

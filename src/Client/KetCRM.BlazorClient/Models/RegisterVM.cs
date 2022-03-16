@@ -2,7 +2,7 @@
 
 namespace KetCRM.BlazorClient.Models
 {
-    public class ApplicationUserVM
+    public class RegisterVM
     {
         [Required]
         public string Name { get; set; }
@@ -27,5 +27,8 @@ namespace KetCRM.BlazorClient.Models
         [Required]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        public int Roles { get; set; }
     }
 }
