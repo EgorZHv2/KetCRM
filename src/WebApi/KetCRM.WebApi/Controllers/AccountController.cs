@@ -41,7 +41,7 @@ namespace KetCRM.WebApi.Controllers
             return Ok(await _accountService.GetUserById(Id));
         }
         [HttpPut("updateUserById/{Id}")]
-        public async Task<IActionResult> UpdateUserById([Required] string Id, UserListDto dto)
+        public async Task<IActionResult> UpdateUserById([Required] string Id, UpdateUserDto dto)
         {
             return Ok(await _accountService.UpdateUserById(dto, Id));
         }

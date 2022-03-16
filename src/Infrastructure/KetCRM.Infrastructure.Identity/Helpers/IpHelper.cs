@@ -10,6 +10,10 @@ namespace KetCRM.Infrastructure.Identity.Helpers
 {
     public class IpHelper
     {
+        /// <summary>
+        /// Получения локального id-адреса 
+        /// </summary>
+        /// <returns>IPAddress</returns>
         public static string GetIpAddress()
         {
             var host = Dns.GetHostEntry(Dns.GetHostName());

@@ -1,6 +1,6 @@
-﻿@using KetCRM.Application.DTOs.Account
-@using System.Net.Http
+﻿@using System.Net.Http
 @using System.Net.Http.Json
+@using KetCRM.BlazorClient.Models
 @inject HttpClient Http
 
 @{
@@ -49,13 +49,14 @@ else
                     <td data-mdb-field="field_4" false="">@item.LastLogin</td>
                     <td data-mdb-field="field_5 mx-auto" false="">
                         <a class="link-dark h6 modal-link-a"><i class="fas fa-user-edit" data-mdb-toggle="modal"
-                                Data-mdb-target="#changeModal"></i></a>
+                                Data-mdb-target="#updateModal"></i></a>
                         <span class="m-2"></span>
                         <a class="link-dark h6 modal-link-a"><i class="fas fa-trash " data-mdb-toggle="modal"
                                 data-mdb-target="#trashModal"></i></a>
                     </td>
                 </tr>
                 <DeleteModal Id=@item.Id></DeleteModal>
+                <UpdateModal Id=@item.Id></UpdateModal>
                 }
                 }
 

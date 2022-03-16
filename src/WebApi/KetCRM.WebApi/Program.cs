@@ -9,7 +9,6 @@ var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
 
 // Add services to the container.
-
 builder.Services.AddIdentityInfrastructure(config);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -44,6 +43,7 @@ using (var serviceScope = app.Services.CreateScope())
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
         await DefaultRoles.SeedAsync(userManager, roleManager);
+        await DefaultUser.SeedAsync(userManager, roleManager);
     }
     catch (Exception ex)
     {

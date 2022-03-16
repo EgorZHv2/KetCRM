@@ -155,47 +155,55 @@ namespace KetCRM.Infrastructure.Identity.Services
             return userId;
         }
 
-        public async Task<UserListDto> GetUserById(string userId)
+        public async Task<UpdateUserDto> GetUserById(string userId)
         {
             ApplicationUser user = await _userManager.FindByIdAsync(userId);
 
-            var role = (await _userManager.GetRolesAsync(user)).ToString();
-            UserListDto userDto = new UserListDto()
+            var role = await _userManager.GetRolesAsync(user);
+            UpdateUserDto userDto = new UpdateUserDto()
             {
-                Id = user.Id,
                 Name = user.Name,
                 Surname = user.Surname,
                 Patronymic = user.Patronymic,
                 Email = user.Email,
                 Login = user.UserName,
-                Roles = role ?? Roles.Basic.ToString()
+                Roles = role[0].ToString() ?? Roles.Basic.ToString()
             };
 
             return userDto;
         }
 
-        public async Task<UserListDto> UpdateUserById(UserListDto request, string userId)
+        public async Task<UpdateUserDto> UpdateUserById(UpdateUserDto request, string userId)
         {
-            ApplicationUser user = await _userManager.FindByIdAsync(userId);
 
-            if(user != null)
+            try
             {
-                var oldRole = _userManager.GetRolesAsync(user);
+                ApplicationUser user = await _userManager.FindByIdAsync(userId);
 
-                user.Name = request.Name;
-                user.Surname = request.Surname;
-                user.Patronymic = request.Patronymic;
-                user.UserName = request.Login;
-                user.Email = request.Email;
-                
-                if(oldRole.ToString() != request.Roles)
+                if (user != null)
                 {
-                    await _userManager.RemoveFromRoleAsync(user, oldRole.ToString());
-                    await _userManager.AddToRoleAsync(user, request.Roles);
-                }
+                    var oldRole = _userManager.GetRolesAsync(user);
 
-                await _userManager.UpdateAsync(user);
+                    user.Name = request.Name;
+                    user.Surname = request.Surname;
+                    user.Patronymic = request.Patronymic;
+                    user.UserName = request.Login;
+                    user.Email = request.Email;
+
+                    if (oldRole.ToString() != request.Roles)
+                    {
+                        await _userManager.RemoveFromRoleAsync(user, oldRole.ToString());
+                        await _userManager.AddToRoleAsync(user, request.Roles);
+                    }
+
+                    await _userManager.UpdateAsync(user);
+                }
             }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            
 
             return request;
         }
