@@ -3,15 +3,20 @@ using KetCRM.Infrastructure.Identity.Contexts;
 using KetCRM.Infrastructure.Identity.Models;
 using KetCRM.Infrastructure.Identity.Seeds;
 using Microsoft.AspNetCore.Identity;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.ClearProviders();       
+var loggerConfig = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateLogger();
+builder.Logging.AddSerilog(loggerConfig);
+
 var config = builder.Configuration;
 
-// Add services to the container.
 builder.Services.AddIdentityInfrastructure(config);
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -47,11 +52,11 @@ using (var serviceScope = app.Services.CreateScope())
     }
     catch (Exception ex)
     {
-        // Log.Warning(ex, "An error occurred seeding the DB");
+        Log.Warning(ex, "Не удалось подключить сид");
     }
     finally
     {
-        // Log.CloseAndFlush();
+        Log.CloseAndFlush();
     }
 }
 

@@ -93,11 +93,6 @@ namespace KetCRM.Infrastructure.Identity.Services
                 UserName = request.Login,
             };
 
-            //if (request.UploadedFile != null)
-            //{
-            //    user.Image = _imageReader.ReadImage(request.UploadedFile);
-            //}
-
             var userWithSameEmail = await _userManager.FindByEmailAsync(request.Email);
             if (userWithSameEmail == null)
             {
