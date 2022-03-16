@@ -15,6 +15,7 @@ namespace KetCRM.Infrastructure.Identity.Models
         public string Patronymic { get; set; }
         public DateTime LastLogin { get; set; }
         public List<RefreshToken> RefreshTokens { get; set; }
+
         public bool OwnsToken(string token)
         {
             return this.RefreshTokens?.Find(x => x.Token == token) != null;
