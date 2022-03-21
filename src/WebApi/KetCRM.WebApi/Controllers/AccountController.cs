@@ -1,7 +1,10 @@
-﻿using KetCRM.Application.DTOs.Account;
-using KetCRM.Application.Interfaces.Account;
+﻿using KetCRM.Identity.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace KetCRM.WebApi.Controllers
 {
@@ -9,48 +12,58 @@ namespace KetCRM.WebApi.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly IAccountService _accountService;
-        public AccountController(IAccountService accountService)
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IConfiguration _configuration;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        public AccountController(UserManager<IdentityUser> userManager, 
+            SignInManager<IdentityUser> signInManager,
+            IConfiguration configuration)
         {
-            _accountService = accountService;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _configuration = configuration;
         }
         [HttpPost("authenticate")]
-        public async Task<IActionResult> AuthenticateAsync(AuthenticationRequest request)
+        public async Task<IActionResult> Authenticate([FromBody] LoginModel login)
         {
-            return Ok(await _accountService.AuthenticateAsync(request, GenerateIPAddress()));
+            var result = await _signInManager.PasswordSignInAsync(login.Email, login.Password, false, false);
+
+            if (!result.Succeeded) return BadRequest(new LoginResult { Successful = false, Error = "Username and password are invalid." });
+
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.Name, login.Email)
+            };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSecurityKey"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var expiry = DateTime.Now.AddDays(Convert.ToInt32(_configuration["JwtExpiryInDays"]));
+
+            var token = new JwtSecurityToken(
+                _configuration["JwtIssuer"],
+                _configuration["JwtAudience"],
+                claims,
+                expires: expiry,
+                signingCredentials: creds
+            );
+
+            return Ok(new LoginResult { Successful = true, Token = new JwtSecurityTokenHandler().WriteToken(token) });
         }
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterAsync(RegisterRequest request)
+        public async Task<IActionResult> RegisterAsync(RegisterModel model)
         {
-            var origin = Request.Headers["origin"];
-            return Ok(await _accountService.RegisterAsync(request, origin));
-        }
-        [HttpGet("getAllUser")]
-        public async Task<IActionResult> AuthenticateUserList()
-        {
-            return Ok(await _accountService.AuthenticateUserList());
-        }
-        [HttpDelete("deleteUser/{Id}")]
-        public async Task<IActionResult> DeleteUser([Required] string Id)
-        {
-            return Ok(await _accountService.DeleteUser(Id));
-        }
-        [HttpGet("getUserById/{Id}")]
-        public async Task<IActionResult> GetUserById([Required] string Id)
-        {
-            return Ok(await _accountService.GetUserById(Id));
-        }
-        [HttpPut("updateUserById/{Id}")]
-        public async Task<IActionResult> UpdateUserById([Required] string Id, UpdateUserDto dto)
-        {
-            return Ok(await _accountService.UpdateUserById(dto, Id));
-        }
-        private string GenerateIPAddress()
-        {
-            if (Request.Headers.ContainsKey("X-Forwarded-For"))
-                return Request.Headers["X-Forwarded-For"];
-            else
-                return HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
+            var newUser = new IdentityUser { UserName = model.Email, Email = model.Email };
+
+            var result = await _userManager.CreateAsync(newUser, model.Password);
+
+            if (!result.Succeeded)
+            {
+                var errors = result.Errors.Select(x => x.Description);
+
+                return Ok(new RegisterResult { Successful = false, Errors = errors });
+            }
+
+            return Ok(new RegisterResult { Successful = true });
         }
     }
 }
