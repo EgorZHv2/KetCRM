@@ -1,17 +1,26 @@
 using KetCRM.Infrastructure.Persistence.ContextDb;
 using KetCRM.Application.Common.Interfaces;
 using KetCRM.Infrastructure.Persistence;
+using AutoMapper;
+using System.Reflection;
+using KetCRM.Application.Common.Mapping;
+using KetCRM.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddInfrastructure(builder.Configuration);
-
+builder.Services.AddApplication();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAutoMapper(config =>
+{
+    config.AddProfile(new MappingProfile(Assembly.GetExecutingAssembly()));
+    config.AddProfile(new MappingProfile(typeof(IApplicationDbContext).Assembly));
+});
 var app = builder.Build();
 
 using(var Scope = app.Services.CreateScope())

@@ -15,13 +15,13 @@ namespace KetCRM.Domain.Entities
             Students = new HashSet<Person>();
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string? Name { get; set; }
         public string? Surname { get; set; }
         public string? Patronymic { get; set; }
         public string? Gender { get; set; }
         public DateTime? BirthDate { get; set; }
-        public int? PersonType { get; set; }
+        public Guid? PersonType { get; set; }
         public string? EmailAddress { get; set; }
         public string? PhoneNumber { get; set; }
         public string? SNILS { get; set; }

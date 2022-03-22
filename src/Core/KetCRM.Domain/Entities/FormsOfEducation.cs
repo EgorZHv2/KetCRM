@@ -10,7 +10,7 @@ namespace KetCRM.Domain.Entities
             Groups = new HashSet<Group>();
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string? Name { get; set; }
 
         public virtual ICollection<Group> Groups { get; set; }

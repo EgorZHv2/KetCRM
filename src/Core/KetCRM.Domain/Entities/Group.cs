@@ -10,13 +10,13 @@ namespace KetCRM.Domain.Entities
             StudentInfos = new HashSet<StudentInfo>();
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public int? SpecializationId { get; set; }
         public bool? AfterEleven { get; set; }
-        public int? FormOfEducationId { get; set; }
-        public int? PersonTeacherId { get; set; }
-        public int? PersonElderId { get; set; }
-        public int? DepartmentId { get; set; }
+        public Guid? FormOfEducationId { get; set; }
+        public Guid? PersonTeacherId { get; set; }
+        public Guid? PersonElderId { get; set; }
+        public Guid? DepartmentId { get; set; }
         public string? CourseNumber { get; set; }
         public string? GroupNumber { get; set; }
 

@@ -10,7 +10,7 @@ namespace KetCRM.Domain.Entities
             StudentInfos = new HashSet<StudentInfo>();
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string? Name { get; set; }
 
         public virtual ICollection<StudentInfo> StudentInfos { get; set; }

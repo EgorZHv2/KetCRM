@@ -20,4 +20,8 @@
     <ProjectReference Include="..\..\Core\KetCRM.Domain\KetCRM.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Configuration\" />
+  </ItemGroup>
+
 </Project>
