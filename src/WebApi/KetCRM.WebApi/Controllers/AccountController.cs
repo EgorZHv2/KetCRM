@@ -15,13 +15,16 @@ namespace KetCRM.WebApi.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         public AccountController(UserManager<ApplicationUser> userManager, 
             SignInManager<ApplicationUser> signInManager,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
+            _roleManager = roleManager;
         }
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] LoginModel login)
@@ -30,9 +33,23 @@ namespace KetCRM.WebApi.Controllers
 
             if (!result.Succeeded) return BadRequest(new LoginResult { Successful = false, Error = "Username and password are invalid." });
 
+            var user = await _userManager.FindByNameAsync(login.Login);
+            if(user == null)
+            {
+                return BadRequest(new LoginResult { Successful = false, Error = "Username are invalid." });
+            }
+
+            var role = await _userManager.GetRolesAsync(user);
+
+            if(role == null)
+            {
+                return BadRequest(new LoginResult { Successful = false, Error = "Role are invalid." });
+            }
+
             var claims = new[]
             {
-                new Claim(ClaimTypes.Name, login.Login)
+                new Claim(ClaimTypes.Name, login.Login),
+                new Claim(ClaimTypes.Role, role.FirstOrDefault())
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSecurityKey"]));
@@ -67,6 +84,8 @@ namespace KetCRM.WebApi.Controllers
             if (!result.Succeeded)
             {
                 var errors = result.Errors.Select(x => x.Description);
+
+                await _userManager.AddToRoleAsync(newUser, model.Role.ToString());
 
                 return Ok(new RegisterResult { Successful = false, Errors = errors });
             }

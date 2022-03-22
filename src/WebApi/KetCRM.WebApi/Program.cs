@@ -1,6 +1,7 @@
 using KetCRM.Account.Data;
 using KetCRM.Identity;
 using KetCRM.Identity.Models;
+using KetCRM.Identity.Seeds;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -30,6 +31,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .AddDefaultTokenProviders();
+
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(o =>
@@ -72,6 +74,27 @@ using (var serviceScope = app.Services.CreateScope())
     {
         var logger = services.GetRequiredService<ILogger<Program>>();
         logger.LogError(exception, "Ошибка инициализации базы данных");
+    }
+}
+
+using (var serviceScope = app.Services.CreateScope())
+{
+    var services = serviceScope.ServiceProvider;
+
+    try
+    {
+        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+        await DefaultRoles.SeedAsync(userManager, roleManager);
+    }
+    catch (Exception ex)
+    {
+        Log.Warning(ex, "An error occurred seeding the DB");
+    }
+    finally
+    {
+        Log.CloseAndFlush();
     }
 }
 

@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KetCRM.Infrastructure.Share
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{DF7ACB30-C5B4-4568-809D-2EA5D95026B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KetCRM.BlazorClient", "src\Client\KetCRM.BlazorClient\KetCRM.BlazorClient.csproj", "{C000558B-64BE-4E6F-B71D-D6960451DC3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KetCRM.BlazorClient", "src\Client\KetCRM.BlazorClient\KetCRM.BlazorClient.csproj", "{C000558B-64BE-4E6F-B71D-D6960451DC3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

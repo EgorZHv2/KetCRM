@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using Microsoft.AspNetCore.Components;
 
 namespace KetCRM.BlazorClient.Services.Account
 {
@@ -22,12 +23,14 @@ namespace KetCRM.BlazorClient.Services.Account
             _localStorage = localStorage;
         }
 
-        //public async Task<RegisterModel> Register(RegisterModel registerModel)
-        //{
-        //    var result = await _httpClient.PostAsJsonAsync<RegisterModel>("api/accounts/register", registerModel);
+        public async Task<RegisterResult> Register(RegisterModel registerModel)
+        {
+            var result = await _httpClient.PostAsJsonAsync("api/account/register", registerModel);
 
-        //    return result;
-        //}
+            var resultRegister = await result.Content.ReadFromJsonAsync<RegisterResult>();
+
+            return resultRegister;
+        }
 
         public async Task<LoginResult> Login(LoginModel loginModel)
         {
@@ -41,7 +44,7 @@ namespace KetCRM.BlazorClient.Services.Account
             }
 
             await _localStorage.SetItemAsync("authToken", loginResult.Token);
-            ((ApiAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(loginModel.Email);
+            ((ApiAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(loginModel.Login);
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", loginResult.Token);
 
             return loginResult;
