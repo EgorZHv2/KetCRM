@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 
-namespace WebApi.Controllers
+namespace KetCRM.WebApi.Controllers
 {
     [ApiController]
     [Route("api/[Controller]/[Action]")]

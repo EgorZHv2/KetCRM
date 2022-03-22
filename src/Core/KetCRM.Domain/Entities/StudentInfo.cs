@@ -5,23 +5,23 @@ namespace KetCRM.Domain.Entities
 {
     public partial class StudentInfo
     {
-        public Guid Id { get; set; }
-        public Guid? StudiedLanguageId { get; set; }
+        public int Id { get; set; }
+        public int? StudiedLanguageId { get; set; }
         public bool? Dormitory { get; set; }
-        public Guid? GroupId { get; set; }
+        public int? GroupId { get; set; }
         public bool? HasTwo { get; set; }
         public string? SchoolCertificateNumber { get; set; }
         public string? YearOfReleaseFromSchool { get; set; }
         public bool? HasMedal { get; set; }
         public string? GraduatedSchool { get; set; }
-        public Guid? SchoolTypeId { get; set; }
+        public int? SchoolTypeId { get; set; }
         public bool? OnABudget { get; set; }
         public bool? TargetedEducation { get; set; }
-        public Guid? PersonId { get; set; }
-        public Guid? SchoolEducationTypeId { get; set; }
+        public int? PersonId { get; set; }
+        public int? SchoolEducationTypeId { get; set; }
         public string? OlimpiadeWinner { get; set; }
         public string? WorkExperience { get; set; }
-        public Guid? StudentStatusId { get; set; }
+        public int? StudentStatusId { get; set; }
         public string? StudentCerteficateNumber { get; set; }
         public string? StudentCardNumber { get; set; }
         public string? StudentRecordBookNumber { get; set; }

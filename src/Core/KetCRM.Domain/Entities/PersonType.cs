@@ -10,9 +10,9 @@ namespace KetCRM.Domain.Entities
             People = new HashSet<Person>();
         }
 
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string? Name { get; set; }
-        public Guid? AccesLevelId { get; set; }
+        public int? AccesLevelId { get; set; }
 
         public virtual AccessLevel? AccesLevel { get; set; }
         public virtual ICollection<Person> People { get; set; }
