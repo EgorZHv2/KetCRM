@@ -1,39 +1,45 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Container wrapper -->
     <div class="container-fluid">
-        <a class="navbar-brand" href="">KetCRM.BlazorClient</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
+        <!-- Toggle button -->
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
         </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-clipboard-list margin-icon"></i> Список</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="fetchdata"><i class="fas fa-chart-pie margin-icon"></i> Статистика</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="user"><i class="fas fa-users margin-icon"></i> Пользователи</a>
+            </li>
+        </ul>
+        <!-- Left links -->
     </div>
-</div>
+    <!-- Collapsible wrapper -->
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </div>
-    </nav>
-</div>
-
-@code {
-    private bool collapseNavMenu = true;
-
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-}
+    <!-- Right elements -->
+    <div class="d-flex align-items-center">
+         
+    </div>
+        <AuthorizeView>
+            <Authorized>
+                <Avatar></Avatar>
+            </Authorized>
+            <NotAuthorized>
+             <button class="btn btn-info" data-mdb-toggle="modal" data-mdb-target="#loginModal">Войти</button>
+            </NotAuthorized>
+        </AuthorizeView>
+        <!-- Right elements -->
+      </div>
+      <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
