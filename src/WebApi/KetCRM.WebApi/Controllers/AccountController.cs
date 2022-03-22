@@ -12,11 +12,11 @@ namespace KetCRM.WebApi.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        public AccountController(UserManager<IdentityUser> userManager, 
-            SignInManager<IdentityUser> signInManager,
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        public AccountController(UserManager<ApplicationUser> userManager, 
+            SignInManager<ApplicationUser> signInManager,
             IConfiguration configuration)
         {
             _userManager = userManager;
@@ -26,13 +26,13 @@ namespace KetCRM.WebApi.Controllers
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] LoginModel login)
         {
-            var result = await _signInManager.PasswordSignInAsync(login.Email, login.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(login.Login, login.Password, false, false);
 
             if (!result.Succeeded) return BadRequest(new LoginResult { Successful = false, Error = "Username and password are invalid." });
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.Name, login.Email)
+                new Claim(ClaimTypes.Name, login.Login)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSecurityKey"]));
@@ -52,7 +52,15 @@ namespace KetCRM.WebApi.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> RegisterAsync(RegisterModel model)
         {
-            var newUser = new IdentityUser { UserName = model.Email, Email = model.Email };
+            var newUser = new ApplicationUser
+            {
+                UserName = model.Login,
+                Email = model.Email,
+                Name = model.Name,
+                Surname = model.Surname,
+                Patronymic = model.Patronymic,
+                Created = DateTime.Now
+            };
 
             var result = await _userManager.CreateAsync(newUser, model.Password);
 

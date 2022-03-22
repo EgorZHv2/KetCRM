@@ -22,9 +22,9 @@ namespace KetCRM.BlazorClient.Services.Account
             _localStorage = localStorage;
         }
 
-        //public async Task<RegisterResult> Register(RegisterModel registerModel)
+        //public async Task<RegisterModel> Register(RegisterModel registerModel)
         //{
-        //    var result = await _httpClient.PostAsJsonAsync<RegisterResult>("api/accounts", registerModel);
+        //    var result = await _httpClient.PostAsJsonAsync<RegisterModel>("api/accounts/register", registerModel);
 
         //    return result;
         //}
