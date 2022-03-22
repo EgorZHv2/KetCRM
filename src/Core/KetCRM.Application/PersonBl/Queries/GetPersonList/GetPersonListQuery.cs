@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace KetCRM.Application.PersonBl.Queries.GetPersonList
 {
-    internal class GetPersonListQuery
+    public class GetPersonListQuery: IRequest<PersonListVm>
     {
     }
 }

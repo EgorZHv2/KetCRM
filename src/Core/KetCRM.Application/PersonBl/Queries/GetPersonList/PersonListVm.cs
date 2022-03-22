@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace KetCRM.Application.PersonBl.Queries.GetPersonList
 {
-    internal class PersonListVm
+    public class PersonListVm
     {
+        public IList<PersonItemDto> Lists { get; set; } = new List<PersonItemDto>();
     }
 }
