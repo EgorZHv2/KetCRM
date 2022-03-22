@@ -1,7 +1,7 @@
 ﻿using KetCRM.BlazorClient.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace KetCRM.BlazorClient.Models
+namespace KetCRM.BlazorClient.Models.Account
 {
     public class RegisterModel
     {

@@ -34,16 +34,17 @@ namespace KetCRM.WebApi.Controllers
             if (!result.Succeeded) return BadRequest(new LoginResult { Successful = false, Error = "Username and password are invalid." });
 
             var user = await _userManager.FindByNameAsync(login.Login);
+
             if(user == null)
             {
-                return BadRequest(new LoginResult { Successful = false, Error = "Username are invalid." });
+                return BadRequest(new LoginResult { Successful = false, Error = "Username not found." });
             }
 
             var role = await _userManager.GetRolesAsync(user);
 
             if(role == null)
             {
-                return BadRequest(new LoginResult { Successful = false, Error = "Role are invalid." });
+                return BadRequest(new LoginResult { Successful = false, Error = "Role not found." });
             }
 
             var claims = new[]
@@ -85,7 +86,14 @@ namespace KetCRM.WebApi.Controllers
             {
                 var errors = result.Errors.Select(x => x.Description);
 
-                await _userManager.AddToRoleAsync(newUser, model.Role.ToString());
+                return Ok(new RegisterResult { Successful = false, Errors = errors });
+            }
+
+            var resultRole = await _userManager.AddToRoleAsync(newUser, model.Role.ToString());
+
+            if (!resultRole.Succeeded)
+            {
+                var errors = result.Errors.Select(x => x.Description);
 
                 return Ok(new RegisterResult { Successful = false, Errors = errors });
             }
