@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /src/Client/KetCRM.BlazorClient/wwwroot/css/mdb
 /src/Client/KetCRM.BlazorClient/wwwroot/js/mdb
+/src/Client/KetCRM.BlazorClient/wwwroot
