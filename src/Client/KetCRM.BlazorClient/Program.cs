@@ -1,6 +1,7 @@
 using Blazored.LocalStorage;
 using KetCRM.BlazorClient;
 using KetCRM.BlazorClient.Services.Account;
+using KetCRM.BlazorClient.Services.Manager;
 using Microsoft.AspNetCore.Components.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,7 @@ builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IManagerService, ManagerService>();
 
 var app = builder.Build();
 

@@ -1,6 +1,9 @@
-﻿namespace KetCRM.BlazorClient.Services.Manager
+﻿using KetCRM.BlazorClient.Models.Manager;
+
+namespace KetCRM.BlazorClient.Services.Manager
 {
-    public class IManagerService
+    public interface IManagerService
     {
+        Task<UserListModel> GetAllUser();
     }
 }
