@@ -1,0 +1,102 @@
+﻿@using KetCRM.BlazorClient.Models.Account
+@using KetCRM.BlazorClient.Services.Account
+@using KetCRM.BlazorClient.Enums
+@inject IAccountService AuthService
+@inject NavigationManager NavigationManager
+
+<div class="modal fade" id="modalRegister" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Изменение данных</h5>
+                  <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <EditForm Model="RegisterModel" OnValidSubmit="HandleRegistration">
+                <div class="modal-body">
+                @if (ShowErrors)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @foreach (var error in Errors)
+                        {
+                            <p>@error</p>
+                        }
+                    </div>
+                }
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                  <div class="row">
+                    <div class="col-6">
+                      <label for="name">Имя</label>
+                      <InputText Id="name" class="form-control" @bind-Value="RegisterModel.Name" />
+                      <label for="surname">Фамилия</label>
+                      <InputText Id="surname" class="form-control" @bind-Value="RegisterModel.Surname" />
+                      <label for="patronymic">Отчество</label>
+                      <InputText Id="patronymic" class="form-control" @bind-Value="RegisterModel.Patronymic" />
+                      <label for="login">Логин</label>
+                      <InputText Id="login" class="form-control" @bind-Value="RegisterModel.Login" />
+                    </div>
+                    <div class="col-6">
+                      <label for="email">Почта</label>
+                      <InputText Id="email" class="form-control" @bind-Value="RegisterModel.Email" />
+                      <label for="password">Пароль</label>
+                      <InputText Id="password" type="password" class="form-control" @bind-Value="RegisterModel.Password" />
+                      <label for="password">Пароль еще раз</label>
+                      <InputText Id="password" type="password" class="form-control" @bind-Value="RegisterModel.ConfirmPassword" />
+                      <label for="role">Роль</label>
+                      <InputSelect @bind-Value="RegisterModel.Role" style="padding: 4px 0 4px 12px; font-size: 16px"
+                        class="gray-color form-select form-select-sm align-items-center">
+                        <option selected value="@Roles.Basic" data-tokens="ketchup mustard">Староста</option>
+                        <option value="@Roles.Moderator">Кл.руководитель</option>
+                        <option value="@Roles.Admin">Секретарь</option>
+                        <option value="@Roles.SuperAdmin">Админ</option>
+                     </InputSelect>
+                    </div>
+                    <div class="mt-3">
+                      <input class="form-control gray-color" type="file" id="formFile">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-mdb-dismiss="modal">Отменить</button>
+                  <button type="submit" class="btn btn-info">
+                    @{
+                    if(loading)
+                    {
+                        <span>Загрузка...</span>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    }
+                    else
+                    {
+                        <span>Добавить</span>
+                    }
+                    }
+                </button>
+                </div>
+                </EditForm>
+              </div>
+            </div>
+       </div>
+@code {
+
+    private RegisterModel RegisterModel = new RegisterModel();
+    private bool ShowErrors;
+    private IEnumerable<string> Errors;
+    private bool loading;
+
+    private async Task HandleRegistration()
+    {
+        ShowErrors = false;
+
+        var result = await AuthService.Register(RegisterModel);
+
+        if (result.Successful)
+        {
+        }
+        else
+        {
+            Errors = result.Errors;
+            ShowErrors = true;
+        }
+    }
+
+}

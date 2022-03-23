@@ -42,7 +42,7 @@ namespace KetCRM.WebApi.Controllers
 
             user.LastLogin = DateTime.Now;
 
-            _userManager.UpdateAsync(user);
+            await _userManager.UpdateAsync(user);
 
             var role = await _userManager.GetRolesAsync(user);
 
