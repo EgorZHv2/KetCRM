@@ -1,5 +1,35 @@
 ﻿<h3>UserManager</h3>
 
+<div class="row mt-4 mb-3">
+      <div class="col-6 h4">
+        Пользователи
+      </div>
+      <div class="col-6 d-flex justify-content-end">
+        <button type="button" class="btn btn-info" data-mdb-toggle="modal" data-mdb-target="#modalRegister">
+          Добавить пользователя
+        </button>
+      </div>
+    </div>
+    <section class="pb-4">
+      <div class="bg-white border rounded-5">
+
+        <section class="w-100 p-4 pb-4">
+          <div class="form-outline mb-4">
+            <input type="search" class="form-control" id="datatable-search-input">
+            <label class="form-label" for="datatable-search-input" style="margin-left: 0px;">Найти пользователя</label>
+            <div class="form-notch">
+              <div class="form-notch-leading" style="width: 9px;"></div>
+              <div class="form-notch-middle" style="width: 47.2px;"></div>
+              <div class="form-notch-trailing"></div>
+            </div>
+          </div>
+          <Table></Table>
+        </section>
+
+
+      </div>
+    </section>
+
 @code {
 
 }
