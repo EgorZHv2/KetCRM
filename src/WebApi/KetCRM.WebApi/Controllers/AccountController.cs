@@ -40,6 +40,10 @@ namespace KetCRM.WebApi.Controllers
                 return BadRequest(new LoginResult { Successful = false, Error = "Username not found." });
             }
 
+            user.LastLogin = DateTime.Now;
+
+            _userManager.UpdateAsync(user);
+
             var role = await _userManager.GetRolesAsync(user);
 
             if(role == null)
