@@ -24,7 +24,6 @@ else
             <thead class="datatable-header">
                 <tr>
 
-                    <th style="cursor: pointer;" scope="col">ID</th>
                     <th style="cursor: pointer;" scope="col">Логин</th>
                     <th style="cursor: pointer;" scope="col">Почта</th>
                     <th style="cursor: pointer;" scope="col">Роль</th>
@@ -41,7 +40,6 @@ else
                 foreach (var item in userList.Lists)
                 {
                 <tr scope="row" data-mdb-index="0">
-                    <td data-mdb-field="field_0" false="">@item.Id</td>
                     <td data-mdb-field="field_1" false="">@item.Login</td>
                     <td data-mdb-field="field_2" false="">@item.Email</td>
                     <td data-mdb-field="field_3" false="">@item.Roles</td>
