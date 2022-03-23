@@ -1,4 +1,5 @@
-﻿using KetCRM.Identity.Services;
+﻿using KetCRM.Identity.Models;
+using KetCRM.Identity.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KetCRM.Identity.Controllers
@@ -16,6 +17,11 @@ namespace KetCRM.Identity.Controllers
         public async Task<IActionResult> GetAllUser()
         {
             return Ok(await _managerService.GetAllUser());
+        }
+        [HttpGet("GetAvatar/{name}")]
+        public async Task<IActionResult> GetAvatar(string name)
+        {
+            return Ok(await _managerService.GetAvatar(name));
         }
     }
 }

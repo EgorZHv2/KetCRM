@@ -42,5 +42,7 @@ namespace KetCRM.Identity.Models
         [Required]
         [Display(Name = "Роль")]
         public Roles Role { get; set; }
+
+        public byte[]? Image { get; set; }
     }
 }

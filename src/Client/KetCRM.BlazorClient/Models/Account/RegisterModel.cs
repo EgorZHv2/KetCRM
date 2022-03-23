@@ -42,5 +42,7 @@ namespace KetCRM.BlazorClient.Models.Account
         [Required]
         [Display(Name = "Роль")]
         public Roles Role { get; set; }
+
+        public byte[]? Image { get; set; }
     }
 }

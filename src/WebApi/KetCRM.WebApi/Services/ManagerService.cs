@@ -1,4 +1,5 @@
-﻿using KetCRM.Identity.Models;
+﻿using KetCRM.Identity.Exceptions;
+using KetCRM.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace KetCRM.Identity.Services
@@ -33,6 +34,24 @@ namespace KetCRM.Identity.Services
             }
 
             return users;
+        }
+        public async Task<AvatarModel> GetAvatar(string name)
+        {
+            var user = await _userManager.FindByNameAsync(name);
+
+            if(user == null)
+            {
+                throw new NotFoundException(name);
+            }
+
+            AvatarModel avatarModel = new AvatarModel()
+            {
+                Image = user.Image,
+                Name = user.Name,
+                Surname = user.Surname
+            };
+
+            return avatarModel;
         }
     }
 }

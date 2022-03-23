@@ -5,5 +5,6 @@ namespace KetCRM.Identity.Services
     public interface IManagerService
     {
         Task<UserListModel> GetAllUser();
+        Task<AvatarModel> GetAvatar(string name);
     }
 }

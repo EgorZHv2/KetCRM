@@ -15,5 +15,11 @@ namespace KetCRM.BlazorClient.Services.Manager
 
             return userList;
         }
+        public async Task<AvatarModel> GetAvatar(string name)
+        {
+            AvatarModel avatarModel = await _httpClient.GetFromJsonAsync<AvatarModel>($"api/manager/getavatar/{ name }");
+
+            return avatarModel;
+        }
     }
 }

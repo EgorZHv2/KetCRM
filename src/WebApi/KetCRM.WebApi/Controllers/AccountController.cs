@@ -81,7 +81,8 @@ namespace KetCRM.WebApi.Controllers
                 Name = model.Name,
                 Surname = model.Surname,
                 Patronymic = model.Patronymic,
-                Created = DateTime.Now
+                Created = DateTime.Now,
+                Image = model.Image,
             };
 
             var result = await _userManager.CreateAsync(newUser, model.Password);

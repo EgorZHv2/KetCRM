@@ -52,7 +52,7 @@
                      </InputSelect>
                     </div>
                     <div class="mt-3">
-                      <input class="form-control gray-color" type="file" id="formFile">
+                      <InputFile  OnChange="@SingleUpload" accept=".jpg" class="form-control gray-color" id="formFile" />
                     </div>
                   </div>
                 </div>
@@ -98,5 +98,12 @@
             ShowErrors = true;
         }
     }
+    private async Task SingleUpload(InputFileChangeEventArgs e)
+    {
+        MemoryStream ms = new MemoryStream();
+        await e.File.OpenReadStream().CopyToAsync(ms);
+        var bytes = ms.ToArray();
 
+        RegisterModel.Image = bytes;
+    }
 }
