@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KetCRM.Application.PersonBl.Commands.DeletePerson
 {
-    internal class DeletePersonCommand
+    public class DeletePersonCommand
     {
     }
 }

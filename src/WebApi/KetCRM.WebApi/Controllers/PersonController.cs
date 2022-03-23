@@ -1,7 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using KetCRM.Application;
+using KetCRM.Application.PersonBl.Queries.GetPersonList;
+using KetCRM.Application.PersonBl.Commands.CreatePerson;
+using KetCRM.WebApi.Models;
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
-using KetCRM.Application.PersonBl.Queries.GetPersonList;
+
 
 
 namespace KetCRM.WebApi.Controllers
@@ -22,6 +27,13 @@ namespace KetCRM.WebApi.Controllers
             var query = new GetPersonListQuery();
             var vm = await Mediator.Send(query);
             return Ok(vm);
+        }
+        [HttpPost]
+        public async Task<ActionResult<int>>Create([FromBody] CreatePersonDto createPerson)
+        {
+            var command = _mapper.Map<CreatePersonCommand>(createPerson);
+            var personId = await Mediator.Send(command);
+            return Ok(personId);
         }
     }
 }

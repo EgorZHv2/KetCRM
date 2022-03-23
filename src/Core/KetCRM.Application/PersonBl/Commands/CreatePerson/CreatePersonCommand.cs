@@ -8,7 +8,7 @@ using MediatR;
 
 namespace KetCRM.Application.PersonBl.Commands.CreatePerson;
 
-internal class CreatePersonCommand:IRequest<int>
+public class CreatePersonCommand:IRequest<int>
 {
     [Required]
     public string Name { get; set; }

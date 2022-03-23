@@ -6,6 +6,7 @@ using System.Reflection;
 using KetCRM.Application.Common.Mapping;
 using KetCRM.Application;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

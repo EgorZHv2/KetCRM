@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KetCRM.Application.PersonBl.Commands.UpdatePerson
 {
-    internal class UpdatePersonCommand
+    public class UpdatePersonCommand
     {
     }
 }
