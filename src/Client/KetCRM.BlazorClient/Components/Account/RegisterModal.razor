@@ -52,7 +52,7 @@
                      </InputSelect>
                     </div>
                     <div class="mt-3">
-                      <InputFile  OnChange="@SingleUpload" accept=".jpg" class="form-control gray-color" id="formFile" />
+                      <InputFile OnChange="@SingleUpload" accept=".jpg" class="form-control gray-color" id="formFile" />
                     </div>
                   </div>
                 </div>
@@ -92,7 +92,7 @@
 
         if (result.Successful)
         {
-            
+            ClearInputFields();   
         }
         else
         {
@@ -107,6 +107,16 @@
         var bytes = ms.ToArray();
 
         RegisterModel.Image = bytes;
+    }
+    private void ClearInputFields()
+    {
+        RegisterModel.Name = string.Empty; 
+        RegisterModel.Surname = string.Empty;
+        RegisterModel.Patronymic = string.Empty;
+        RegisterModel.Password = string.Empty;
+        RegisterModel.ConfirmPassword = string.Empty;
+        RegisterModel.Email = string.Empty;
+        RegisterModel.Login = string.Empty;
     }
 
     public Guid Guid = Guid.NewGuid();
