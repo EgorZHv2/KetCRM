@@ -4,7 +4,7 @@
 @inject IAccountService AuthService
 @inject NavigationManager NavigationManager
 
-<div class="modal fade" id="modalRegister" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal @ModalClass" id="modalRegister" tabindex="-1" style="display:@ModalDisplay" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
@@ -57,7 +57,7 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-mdb-dismiss="modal">Отменить</button>
+                  <button type="button" class="btn btn-danger"  data-mdb-dismiss="modal" @onclick="() => Close()">Отменить</button>
                   <button type="submit" class="btn btn-info">
                     @{
                     if(loading)
@@ -86,17 +86,19 @@
     private async Task HandleRegistration()
     {
         ShowErrors = false;
-
+        loading = true;
         var result = await AuthService.Register(RegisterModel);
+        loading = false;
 
         if (result.Successful)
         {
+            
         }
         else
         {
             Errors = result.Errors;
             ShowErrors = true;
-        }
+        }   
     }
     private async Task SingleUpload(InputFileChangeEventArgs e)
     {
@@ -105,5 +107,26 @@
         var bytes = ms.ToArray();
 
         RegisterModel.Image = bytes;
+    }
+
+    public Guid Guid = Guid.NewGuid();
+    public string ModalDisplay = "none;";
+    public string ModalClass = "";
+    public bool ShowBackdrop = false;
+
+    public void Open()
+    {
+        ModalDisplay = "block;";
+        ModalClass = "Show";
+        ShowBackdrop = true;
+        StateHasChanged();
+    }
+
+    public void Close()
+    {
+        ModalDisplay = "none";
+        ModalClass = "";
+        ShowBackdrop = false;
+        StateHasChanged();
     }
 }
