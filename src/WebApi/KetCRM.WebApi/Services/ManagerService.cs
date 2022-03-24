@@ -76,5 +76,18 @@ namespace KetCRM.Identity.Services
 
             return userModel;
         }
+        public async Task<string> DeleteUserByName(string name)
+        {
+            var user = await _userManager.FindByNameAsync(name);
+
+            if(user == null)
+            {
+                throw new NotFoundException(name);
+            }
+
+            await _userManager.DeleteAsync(user);
+
+            return name;
+        }
     }
 }

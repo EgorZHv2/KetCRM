@@ -7,7 +7,7 @@
         <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">Изменение данных</h5>
-                  <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                  <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" @onclick="() => Close()"></button>
                 </div>
                 <EditForm Model="user" OnValidSubmit="HandleUpdate">
                 <div class="modal-body">

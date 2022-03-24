@@ -18,6 +18,7 @@ else
 {
 
 <UpdateModal @ref="updateModal"></UpdateModal>
+<DeleteUserModal @ref="deleteUserModal"></DeleteUserModal>
 
 <div id="datatable" class="datatable">
     <div class="datatable-inner table-responsive ps" style="overflow: auto; position: relative;">
@@ -52,7 +53,7 @@ else
                         <a @onclick="() => updateModal.Open(item.Login)" class="link-dark h6 modal-link-a"><i class="fas fa-user-edit" data-mdb-toggle="modal"
                                 Data-mdb-target="#updateModal"></i></a>
                         <span class="m-2"></span>
-                        <a class="link-dark h6 modal-link-a"><i class="fas fa-trash " data-mdb-toggle="modal"
+                        <a @onclick="() => deleteUserModal.Open(item.Login)" class="link-dark h6 modal-link-a"><i class="fas fa-trash " data-mdb-toggle="modal"
                                 data-mdb-target="#trashModal"></i></a>
                     </td>
                 </tr>
@@ -76,6 +77,7 @@ else
 
 @code{
     private UpdateModal updateModal { get; set; }
+    private DeleteUserModal deleteUserModal { get; set; }
     private UserListModel userList;
     private bool loading;
     private string name;

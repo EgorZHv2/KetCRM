@@ -27,5 +27,17 @@ namespace KetCRM.BlazorClient.Services.Manager
 
             return user;
         }
+        public async Task<bool> DeleteUserByName(string name)
+        {
+            var result = await _httpClient.DeleteAsync($"api/manager/DeleteUserByName/{ name }");
+            if (result.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     } 
 }

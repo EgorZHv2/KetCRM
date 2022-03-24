@@ -7,5 +7,6 @@ namespace KetCRM.Identity.Services
         Task<UserListModel> GetAllUser();
         Task<AvatarModel> GetAvatar(string name);
         Task<UserModel> GetUserByName(string name);
+        Task<string> DeleteUserByName(string name);
     }
 }

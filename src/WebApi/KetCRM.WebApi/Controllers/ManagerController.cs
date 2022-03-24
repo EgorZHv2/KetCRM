@@ -28,5 +28,10 @@ namespace KetCRM.Identity.Controllers
         {
             return Ok(await _managerService.GetUserByName(name));
         }
+        [HttpDelete("DeleteUserByName/{name}")]
+        public async Task<IActionResult> DeleteUserByName(string name)
+        {
+            return Ok(await _managerService.DeleteUserByName(name));
+        }
     }
 }
