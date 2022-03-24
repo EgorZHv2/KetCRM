@@ -1,6 +1,8 @@
 ﻿using KetCRM.Application;
 using KetCRM.Application.PersonBl.Queries.GetPersonList;
 using KetCRM.Application.PersonBl.Commands.CreatePerson;
+using KetCRM.Application.PersonBl.Commands.DeletePerson;
+using KetCRM.Application.PersonBl.Commands.UpdatePerson;
 using KetCRM.WebApi.Models;
 
 using Microsoft.AspNetCore.Http;
@@ -34,6 +36,16 @@ namespace KetCRM.WebApi.Controllers
             var command = _mapper.Map<CreatePersonCommand>(createPerson);
             var personId = await Mediator.Send(command);
             return Ok(personId);
+        }
+        [HttpDelete]
+        public async Task<ActionResult<int>> Delete(int id)
+        {
+            var command = new DeletePersonCommand()
+            {
+                Id = id
+            };
+            await Mediator.Send(command);
+            return NoContent();
         }
     }
 }
