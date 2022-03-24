@@ -37,6 +37,13 @@ namespace KetCRM.WebApi.Controllers
             var personId = await Mediator.Send(command);
             return Ok(personId);
         }
+        [HttpPut]
+        public async Task<ActionResult<int>>Update([FromBody]UpdatePersonDto updatePersonDto)
+        {
+            var command = _mapper.Map<UpdatePersonCommand>(updatePersonDto);
+            var personid = await Mediator.Send(command);
+            return Ok(personid);
+        }
         [HttpDelete]
         public async Task<ActionResult<int>> Delete(int id)
         {
