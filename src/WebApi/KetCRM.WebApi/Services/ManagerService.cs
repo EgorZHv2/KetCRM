@@ -53,5 +53,28 @@ namespace KetCRM.Identity.Services
 
             return avatarModel;
         }
+        public async Task<UserModel> GetUserByName(string name)
+        {
+            var user = await _userManager.FindByNameAsync(name);
+
+            if(user == null)
+            {
+                throw new NotFoundException(name);
+            }
+
+            var role = await _userManager.GetRolesAsync(user);
+
+            UserModel userModel = new UserModel()
+            {
+                Name = user.Name,
+                Surname = user.Surname,
+                Patronymic = user.Patronymic,
+                Login = user.UserName,
+                Email = user.Email,
+                Role = role.ToString() ?? "None"
+            };
+
+            return userModel;
+        }
     }
 }

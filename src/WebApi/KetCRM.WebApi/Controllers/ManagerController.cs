@@ -23,5 +23,10 @@ namespace KetCRM.Identity.Controllers
         {
             return Ok(await _managerService.GetAvatar(name));
         }
+        [HttpGet("GetUserByName/{name}")]
+        public async Task<IActionResult> GetUserByName(string name)
+        {
+            return Ok(await _managerService.GetUserByName(name));
+        }
     }
 }

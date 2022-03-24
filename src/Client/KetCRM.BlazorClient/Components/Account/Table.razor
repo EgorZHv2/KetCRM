@@ -17,6 +17,7 @@ if(loading)
 else
 {
 
+<UpdateModal @ref="updateModal"></UpdateModal>
 
 <div id="datatable" class="datatable">
     <div class="datatable-inner table-responsive ps" style="overflow: auto; position: relative;">
@@ -39,7 +40,7 @@ else
 
                 foreach (var item in userList.Lists)
                 {
-                <tr scope="row" data-mdb-index="0">
+                <tr @key="item.Login" scope="row" data-mdb-index="0">
                     <td data-mdb-field="field_1" false="">@item.Login</td>
                     <td data-mdb-field="field_2" false="">@item.Email</td>
                     <td data-mdb-field="field_3" false="">@item.Roles</td>
@@ -48,7 +49,7 @@ else
                     <td data-mdb-field="field_3" false="">@item.Patronymic</td>
                     <td data-mdb-field="field_4" false="">@item.LastLogin</td>
                     <td data-mdb-field="field_5 mx-auto" false="">
-                        <a class="link-dark h6 modal-link-a"><i class="fas fa-user-edit" data-mdb-toggle="modal"
+                        <a @onclick="() => updateModal.Open(item.Login)" class="link-dark h6 modal-link-a"><i class="fas fa-user-edit" data-mdb-toggle="modal"
                                 Data-mdb-target="#updateModal"></i></a>
                         <span class="m-2"></span>
                         <a class="link-dark h6 modal-link-a"><i class="fas fa-trash " data-mdb-toggle="modal"
@@ -57,7 +58,6 @@ else
                 </tr>
                 }
                 }
-
             </tbody>
         </table>
         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
@@ -67,18 +67,29 @@ else
             <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div>
         </div>
     </div>
-
+    @if(show){
+        <UpdateModal name=@name></UpdateModal>
+    }
 </div>
 }
 }
 
 @code{
+    private UpdateModal updateModal { get; set; }
     private UserListModel userList;
     private bool loading;
+    private string name;
+    private bool show = false;
     protected override async Task OnInitializedAsync()
     {
         loading = true;
         userList = await managerService.GetAllUser();
         loading = false;
+    }
+
+    private async Task UpdateClick(string name)
+    {
+        this.name = name;
+        show = true;
     }
 }

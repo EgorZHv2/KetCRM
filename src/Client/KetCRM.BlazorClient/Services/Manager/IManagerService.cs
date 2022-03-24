@@ -6,5 +6,6 @@ namespace KetCRM.BlazorClient.Services.Manager
     {
         Task<UserListModel> GetAllUser();
         Task<AvatarModel> GetAvatar(string name);
+        Task<UserModel> GetUserByName(string name);
     }
 }
