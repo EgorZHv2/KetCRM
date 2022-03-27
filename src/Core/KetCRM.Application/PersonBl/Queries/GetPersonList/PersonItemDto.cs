@@ -23,7 +23,7 @@ namespace KetCRM.Application.PersonBl.Queries.GetPersonList
         public string? SNILS { get; set; }
         public string? InsuranceNumber { get; set; }
         public string? PassportSeries { get; set; }
-        public string? PassportNumber { get; set; }
+        public string? PassportNumber { get; set; } 
         public DateTime? PassportDate { get; set; }
         public string? PassportPlace { get; set; }
         public string? Comment { get; set; }

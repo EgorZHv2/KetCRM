@@ -31,7 +31,7 @@ namespace KetCRM.WebApi.Controllers
             return Ok(vm);
         }
         [HttpGet]
-        public async Task<ActionResult<PersonVm>> GetOne(int id)
+        public async Task<ActionResult<PersonItemDto>> GetOne(int id)
         {
             var query = new GetPersonQuery() { Id = id};
             var vm = await Mediator.Send(query);

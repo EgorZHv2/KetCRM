@@ -12,7 +12,7 @@ using KetCRM.Application.Common.Exceptions;
 using KetCRM.Domain.Entities;
 namespace KetCRM.Application.PersonBl.Queries.GetPersonList
 {
-    public class GetPersonQueryHandler:IRequestHandler<GetPersonQuery,PersonVm>
+    public class GetPersonQueryHandler:IRequestHandler<GetPersonQuery,PersonItemDto>
     {
         private readonly IMapper _mapper;
         private readonly IApplicationDbContext _dbcontext;
@@ -22,16 +22,35 @@ namespace KetCRM.Application.PersonBl.Queries.GetPersonList
             _mapper = mapper;
             _dbcontext = dbContext;
         }
-        public async Task<PersonVm> Handle(GetPersonQuery request, CancellationToken cancellationToken)
+        public async Task<PersonItemDto> Handle(GetPersonQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _dbcontext.Persons.FindAsync(request.Id, cancellationToken);
+            var entity = await _dbcontext.Persons.FindAsync(request.Id);
             if (entity == null)
             {
                 throw new NotFoundException(nameof(Person), request.Id);
             }
-            
-            
-            return new PersonVm {person = entity};
+
+
+            return new PersonItemDto
+            {
+                Id = entity.Id,
+                Name = entity.Name,
+                Surname = entity.Surname,
+                Patronymic = entity.Patronymic,
+                Gender = entity.Gender,
+                BirthDate = entity.BirthDate,
+                PersonType = entity.PersonType,
+                EmailAddress = entity.EmailAddress,
+                PhoneNumber = entity.PhoneNumber,
+                SNILS = entity.SNILS,
+                InsuranceNumber = entity.InsuranceNumber,
+                PassportSeries = entity.PassportSeries,
+                PassportNumber = entity.PassportNumber,
+                PassportDate = entity.PassportDate,
+                PassportPlace = entity.PassportPlace,
+                Comment = entity.Comment,
+                Photo = entity.Photo
+            };
         }
     }
 }
