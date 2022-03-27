@@ -10,7 +10,8 @@ using KetCRM.Application.Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using KetCRM.Application.Common.Exceptions;
 using KetCRM.Domain.Entities;
-namespace KetCRM.Application.PersonBl.Queries.GetPersonList
+using KetCRM.Application.PersonBl.Queries.GetPersonList;
+namespace KetCRM.Application.PersonBl.Queries
 {
     public class GetPersonQueryHandler:IRequestHandler<GetPersonQuery,PersonItemDto>
     {
@@ -22,9 +23,9 @@ namespace KetCRM.Application.PersonBl.Queries.GetPersonList
             _mapper = mapper;
             _dbcontext = dbContext;
         }
-        public async Task<PersonItemDto> Handle(GetPersonQuery request, CancellationToken cancellationToken)
+        public async Task<PersonItemDto> Handle(GetPersonQuery request,CancellationToken cancellationToken)
         {
-            var entity = await _dbcontext.Persons.FindAsync(request.Id);
+            var entity = await _dbcontext.Persons.FindAsync(new object[] { request.Id },cancellationToken);
             if (entity == null)
             {
                 throw new NotFoundException(nameof(Person), request.Id);

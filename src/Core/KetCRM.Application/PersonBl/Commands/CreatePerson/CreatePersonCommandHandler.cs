@@ -9,7 +9,7 @@ using KetCRM.Domain.Entities;
 
 namespace KetCRM.Application.PersonBl.Commands.CreatePerson;
 
-public class CreatePersonCommandHandler:IRequestHandler<CreatePersonCommand, int>
+public class CreatePersonCommandHandler:IRequestHandler<CreatePersonCommand,int>
 {
     private readonly IApplicationDbContext _dbContext;
     public CreatePersonCommandHandler(IApplicationDbContext dbContext)

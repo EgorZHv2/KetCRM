@@ -1,5 +1,6 @@
 ﻿using KetCRM.Application;
 using KetCRM.Application.PersonBl.Queries.GetPersonList;
+using KetCRM.Application.PersonBl.Queries;
 using KetCRM.Application.PersonBl.Commands.CreatePerson;
 using KetCRM.Application.PersonBl.Commands.DeletePerson;
 using KetCRM.Application.PersonBl.Commands.UpdatePerson;
