@@ -3,7 +3,7 @@ using KetCRM.Application.PersonBl.Commands.UpdatePerson;
 using KetCRM.Application.Common.Mapping;
 
 
-namespace KetCRM.WebApi.Models
+namespace KetCRM.WebApi.Models.Person
 {
     public class UpdatePersonDto:IMapFrom<UpdatePersonCommand>
     {

@@ -22,4 +22,9 @@
     <ProjectReference Include="..\KetCRM.Domain\KetCRM.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="StudentBl\Commands\" />
+    <Folder Include="StudentBl\Queries\" />
+  </ItemGroup>
+
 </Project>

@@ -3,7 +3,7 @@ using KetCRM.Application.PersonBl.Queries.GetPersonList;
 using KetCRM.Application.PersonBl.Commands.CreatePerson;
 using KetCRM.Application.PersonBl.Commands.DeletePerson;
 using KetCRM.Application.PersonBl.Commands.UpdatePerson;
-using KetCRM.WebApi.Models;
+using KetCRM.WebApi.Models.Person;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +13,7 @@ using AutoMapper;
 
 namespace KetCRM.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class PersonController : ApiControllerBase
     {
@@ -27,6 +27,13 @@ namespace KetCRM.WebApi.Controllers
         public async Task<ActionResult<PersonListVm>> GetAll()
         {
             var query = new GetPersonListQuery();
+            var vm = await Mediator.Send(query);
+            return Ok(vm);
+        }
+        [HttpGet]
+        public async Task<ActionResult<PersonVm>> GetOne(int id)
+        {
+            var query = new GetPersonQuery() { Id = id};
             var vm = await Mediator.Send(query);
             return Ok(vm);
         }

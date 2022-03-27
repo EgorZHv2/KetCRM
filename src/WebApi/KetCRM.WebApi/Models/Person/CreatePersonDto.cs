@@ -2,7 +2,7 @@
 using KetCRM.Application.PersonBl.Commands.CreatePerson;
 using KetCRM.Application.Common.Mapping;
 
-namespace KetCRM.WebApi.Models
+namespace KetCRM.WebApi.Models.Person
 {
     public class CreatePersonDto:IMapFrom<CreatePersonCommand>
     {

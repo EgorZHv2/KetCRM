@@ -8,8 +8,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KetCRM.Application.PersonBl.Queries.GetPersonList
 {
-    public class GetPersonListQuery: IRequest<PersonListVm>
+    public class GetPersonQuery:IRequest<PersonVm>
     {
-        
+        [Required]
+        public int Id { get; set; }
     }
 }
