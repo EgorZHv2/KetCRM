@@ -6,17 +6,15 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownMenuLink"
               role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-              <div class="avatar">
+            <div class="avatar">
                 @{
                     if(avatar.Image != null)
                     {
-                        <img src="data:image/jpeg;base64,@(Convert.ToBase64String(avatar.Image))" height="35"
-                        alt="Portrait of a Woman" loading="lazy" />
+                        <img src="data:image/jpeg;base64,@(Convert.ToBase64String(avatar.Image))" height="35" loading="lazy" />
                     }
                     else
                     {
-                        <img src="~/img/avatar.jpg" height="35"
-                        alt="Portrait of a Woman" loading="lazy" />
+                        <img src="img/avatar.jpg" height="35" loading="lazy" />
                     }
                 }
                     </div>
@@ -47,7 +45,6 @@
         var user = authState.User;
 
         Name = user.Identity.Name;
-
         avatar = await _managerService.GetAvatar(Name);
     }
 }
