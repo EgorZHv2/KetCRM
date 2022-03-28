@@ -59,11 +59,9 @@ else
                     <td data-mdb-field="field_3" false="">@item.Patronymic</td>
                     <td data-mdb-field="field_4" false="">@item.LastLogin</td>
                     <td data-mdb-field="field_5 mx-auto" false="">
-                        <a @onclick="() => updateModal.Open(item.Login)" class="link-dark h6 modal-link-a"><i class="fas fa-user-edit" data-mdb-toggle="modal"
-                                Data-mdb-target="#updateModal"></i></a>
+                        <a @onclick="() => updateModal.Open(item.Login)" class="link-dark h6 modal-link-a"><i class="fas fa-user-edit" data-mdb-toggle="modal"></i></a>
                         <span class="m-2"></span>
-                        <a @onclick="() => deleteUserModal.Open(item.Login)" class="link-dark h6 modal-link-a"><i class="fas fa-trash " data-mdb-toggle="modal"
-                                data-mdb-target="#deleteUserModal"></i></a>
+                        <a @onclick="() => deleteUserModal.Open(item.Login)" class="link-dark h6 modal-link-a"><i class="fas fa-trash " data-mdb-toggle="modal"></i></a>
                     </td>
                 </tr>
                 }
