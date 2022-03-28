@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json;
 using Microsoft.AspNetCore.Components;
 using KetCRM.BlazorClient.Models.Account;
+using KetCRM.BlazorClient.Models.Manager;
 
 namespace KetCRM.BlazorClient.Services.Account
 {
@@ -56,6 +57,15 @@ namespace KetCRM.BlazorClient.Services.Account
             await _localStorage.RemoveItemAsync("authToken");
             ((ApiAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsLoggedOut();
             _httpClient.DefaultRequestHeaders.Authorization = null;
+        }
+            
+        public async Task<UpdateResult> UpdateUser(UpdateUser updateUser, string name)
+        {
+            var result = await _httpClient.PutAsJsonAsync($"api/account/updateUser/{name}", updateUser);
+
+            var updateResult = await result.Content.ReadFromJsonAsync<UpdateResult>();
+
+            return updateResult;
         }
     }
 }

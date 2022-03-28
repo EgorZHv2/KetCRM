@@ -1,7 +1,10 @@
 ﻿@using KetCRM.BlazorClient.Enums
+@using KetCRM.BlazorClient.Models.Account
 @using KetCRM.BlazorClient.Models.Manager
+@using KetCRM.BlazorClient.Services.Account
 @using KetCRM.BlazorClient.Services.Manager
 @inject IManagerService _managerService
+@inject IAccountService _accountService;
 
 <div class="modal @ModalClass" id="modalUpdate" tabindex="-1" style="display:@ModalDisplay" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -12,6 +15,15 @@
                 </div>
                 <EditForm Model="user" OnValidSubmit="HandleUpdate">
                 <div class="modal-body">
+                @if (ShowErrors)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @foreach (var error in Errors)
+                        {
+                            <p>@error</p>
+                        }
+                    </div>
+                }
                 <DataAnnotationsValidator />
                 <ValidationSummary />
                   <div class="row">
@@ -31,7 +43,7 @@
                       <label for="role">Роль</label>
                       <InputSelect @bind-Value="user.Role" style="padding: 4px 0 4px 12px; font-size: 16px"
                         class="gray-color form-select form-select-sm align-items-center">
-                        <option selected value="@Roles.Basic" data-tokens="ketchup mustard">Староста</option>
+                        <option value="@Roles.Basic">Староста</option>
                         <option value="@Roles.Moderator">Кл.руководитель</option>
                         <option value="@Roles.Admin">Секретарь</option>
                         <option value="@Roles.SuperAdmin">Админ</option>
@@ -77,6 +89,10 @@
     public string ModalClass = "";
     public bool ShowBackdrop = false;
     private bool loading = false;
+    private UpdateUser updateUser = new UpdateUser();
+    private bool ShowErrors = false;
+    private IEnumerable<string> Errors;
+    private bool bClearInputFile = false;
 
     public async Task GetUser(string name)
     {
@@ -94,7 +110,48 @@
         StateHasChanged();
     }
 
+    private void ClearInputFields()
+    {
+        user.Name = string.Empty; 
+        user.Surname = string.Empty;
+        user.Patronymic = string.Empty;
+        user.Email = string.Empty;
+        user.Login = string.Empty;
+    }
+
+    private void ClearInputFile()
+    {
+        bClearInputFile = true;
+        StateHasChanged();
+        bClearInputFile = false;
+        StateHasChanged();
+    }
+
     private async Task HandleUpdate(){
+        string name = user.Login;
+        updateUser.Name = user.Name;
+        updateUser.Surname = user.Surname;
+        updateUser.Patronymic = user.Patronymic;
+        updateUser.Email = user.Email;
+        updateUser.Login = user.Login;
+        updateUser.Role = user.Role;
+
+        ShowErrors = false;
+        loading = true;
+        var result = await _accountService.UpdateUser(updateUser, name);
+        loading = false;
+
+        @if (result.Successful)
+        {
+            await Close();
+            ClearInputFields();
+            ClearInputFile();
+        }
+        else
+        {
+            Errors = result.Errors;
+            ShowErrors = true;
+        }  
         await Close();
     }
 

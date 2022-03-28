@@ -1,4 +1,5 @@
 ﻿using KetCRM.Identity.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace KetCRM.Identity.Services
 {

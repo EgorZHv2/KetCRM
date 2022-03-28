@@ -104,7 +104,8 @@ namespace KetCRM.Identity.Services
                 Patronymic = user.Patronymic,
                 Login = user.UserName,
                 Email = user.Email,
-                Role = role.ToString() ?? "None"
+                Role = role[0].ToString() ?? "None",
+                Avatar = user.Image,
             };
 
             return userModel;

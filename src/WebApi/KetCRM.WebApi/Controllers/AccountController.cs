@@ -1,4 +1,5 @@
-﻿using KetCRM.Identity.Models;
+﻿using KetCRM.Identity.Exceptions;
+using KetCRM.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -104,6 +105,50 @@ namespace KetCRM.WebApi.Controllers
             }
 
             return Ok(new RegisterResult { Successful = true });
+        }
+        [HttpPut("updateUser/{name}")]
+        public async Task<IActionResult> UpdateUser(UpdateUser updateUser, string name)
+        {
+            var user = await _userManager.FindByNameAsync(name.Trim());
+
+            if (user == null)
+            {
+                throw new NotFoundException(name);
+            }
+
+            var oldRole = await _userManager.GetRolesAsync(user);
+
+            user.Name = updateUser.Name;
+            user.Surname = updateUser.Surname;
+            user.Patronymic = updateUser.Patronymic;
+            user.UserName = updateUser.Login;
+            user.Email = updateUser.Email;
+
+
+            if (oldRole.FirstOrDefault().ToString() != updateUser.Role.ToString())
+            {
+                var resultRemove = await _userManager.RemoveFromRoleAsync(user, oldRole.FirstOrDefault().ToString());
+                var resultRole = await _userManager.AddToRoleAsync(user, updateUser.Role);
+
+                if (!resultRemove.Succeeded)
+                {
+                    var errors = resultRemove.Errors.Select(x => x.Description);
+
+                    return Ok(new RegisterResult { Successful = false, Errors = errors });
+                }
+                if (!resultRole.Succeeded)
+                {
+                    var errors = resultRole.Errors.Select(x => x.Description);
+
+                    return Ok(new RegisterResult { Successful = false, Errors = errors });
+                }
+            }
+
+            user.Updated = DateTime.Now;
+
+            var result = await _userManager.UpdateAsync(user);
+
+            return Ok(new UpdateResult { Successful = true });
         }
     }
 }

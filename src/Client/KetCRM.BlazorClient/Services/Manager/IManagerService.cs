@@ -1,4 +1,5 @@
-﻿using KetCRM.BlazorClient.Models.Manager;
+﻿using KetCRM.BlazorClient.Models.Account;
+using KetCRM.BlazorClient.Models.Manager;
 
 namespace KetCRM.BlazorClient.Services.Manager
 {
