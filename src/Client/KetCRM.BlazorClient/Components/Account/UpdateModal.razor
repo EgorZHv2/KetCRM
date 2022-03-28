@@ -2,7 +2,8 @@
 @using KetCRM.BlazorClient.Models.Manager
 @using KetCRM.BlazorClient.Services.Manager
 @inject IManagerService _managerService
-<div class="modal @ModalClass" id="modalRegister" tabindex="-1" style="display:@ModalDisplay" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<div class="modal @ModalClass" id="modalUpdate" tabindex="-1" style="display:@ModalDisplay" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
                 <div class="modal-header">
@@ -42,8 +43,8 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-danger"  data-mdb-dismiss="modal" @onclick="() => Close()">Отменить</button>
-                  <button type="submit" class="btn btn-info">
+                  <button type="button" class="btn btn-danger" @onclick="() => Close()">Отменить</button>
+                  <button type="submit" class="btn btn-info" @onclick="HandleUpdate">
                     @{
                     if(loading)
                     {
@@ -70,7 +71,6 @@
 
 
 @code {
-    private string Name = "fdsfds";
     private UserModel user = new UserModel();
     public Guid Guid = Guid.NewGuid();
     public string ModalDisplay = "none;";
@@ -85,9 +85,9 @@
         loading = false;
     }
 
-    public void Open(string name)
+    public async Task Open(string name)
     {
-        GetUser(name);
+        await GetUser(name);
         ModalDisplay = "block;";
         ModalClass = "Show";
         ShowBackdrop = true;
@@ -95,7 +95,7 @@
     }
 
     private async Task HandleUpdate(){
-
+        await Close();
     }
 
     private async Task SingleUpload(InputFileChangeEventArgs e)
@@ -107,7 +107,7 @@
         user.Image = bytes;
     }
 
-    public void Close()
+    public async Task Close()
     {
         ModalDisplay = "none";
         ModalClass = "";

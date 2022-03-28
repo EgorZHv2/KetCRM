@@ -76,11 +76,19 @@
               </div>
             </div>
        </div>
+
+       @if (ShowBackdrop)
+       {
+        <div class="modal-backdrop fade show"></div>
+       }
 @code {
     private RegisterModel RegisterModel = new RegisterModel();
     private bool ShowErrors;
     private IEnumerable<string> Errors;
-    private bool loading;
+    public string ModalDisplay = "none;";
+    public string ModalClass = "";
+    public bool ShowBackdrop = false;
+    private bool loading = false;
 
     private async Task HandleRegistration()
     {
@@ -91,7 +99,7 @@
 
         @if (result.Successful)
         {
-            Close(); 
+            await Close(); 
         }
         else
         {
@@ -118,12 +126,7 @@
         RegisterModel.Login = string.Empty;
     }
 
-    public Guid Guid = Guid.NewGuid();
-    public string ModalDisplay = "none;";
-    public string ModalClass = "";
-    public bool ShowBackdrop = false;
-
-    public void Open()
+    public async Task Open()
     {
         ModalDisplay = "block;";
         ModalClass = "Show";
@@ -131,7 +134,7 @@
         StateHasChanged();
     }
 
-    public void Close()
+    public async Task Close()
     {
         ModalDisplay = "none";
         ModalClass = "";
