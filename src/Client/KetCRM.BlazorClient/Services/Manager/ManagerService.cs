@@ -9,6 +9,12 @@ namespace KetCRM.BlazorClient.Services.Manager
         {
             _httpClient = httpClient;
         }
+        public async Task<UserListModel> GetAllUser(string filter)
+        {
+            UserListModel userList = await _httpClient.GetFromJsonAsync<UserListModel>($"api/manager/getalluser/ { filter }");
+
+            return userList;
+        }
         public async Task<UserListModel> GetAllUser()
         {
             UserListModel userList = await _httpClient.GetFromJsonAsync<UserListModel>("api/manager/getalluser");

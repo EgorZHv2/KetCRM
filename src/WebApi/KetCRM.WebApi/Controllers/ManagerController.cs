@@ -13,6 +13,11 @@ namespace KetCRM.Identity.Controllers
         {
             _managerService = managerService;
         }
+        [HttpGet("GetAllUser/{filter}")]
+        public async Task<IActionResult> GetAllUser(string? filter)
+        {
+            return Ok(await _managerService.GetAllUser(filter));
+        }
         [HttpGet("GetAllUser")]
         public async Task<IActionResult> GetAllUser()
         {

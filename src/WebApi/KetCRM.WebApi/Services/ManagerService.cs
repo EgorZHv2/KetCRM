@@ -11,6 +11,39 @@ namespace KetCRM.Identity.Services
         {
             _userManager = userManager;
         }
+        public async Task<UserListModel> GetAllUser(string filter)
+        {
+            UserListModel users = new UserListModel();
+
+            var user = _userManager.Users;
+
+            filter = filter.Trim().ToUpper();
+
+            users.Lists = (from userItem in user
+                           where userItem.UserName.ToUpper().Contains(filter) ||
+                           userItem.Name.ToUpper().Contains(filter) ||
+                           userItem.Surname.ToUpper().Contains(filter) ||
+                           userItem.Patronymic.ToUpper().Contains(filter) ||
+                           userItem.Email.ToUpper().Contains(filter)
+                           select new UserListDto
+                           {
+                               Id = userItem.Id,
+                               Name = userItem.Name,
+                               Surname = userItem.Surname,
+                               Patronymic = userItem.Patronymic,
+                               Login = userItem.UserName,
+                               LastLogin = (userItem.LastLogin).ToString(),
+                               Email = userItem.Email,
+                           }).ToList();
+
+            foreach (var item in users.Lists)
+            {
+                var entity = await _userManager.FindByIdAsync(item.Id);
+                item.Roles = string.Join("; ", await _userManager.GetRolesAsync(entity));
+            }
+
+            return users;
+        }
         public async Task<UserListModel> GetAllUser()
         {
             UserListModel users = new UserListModel();

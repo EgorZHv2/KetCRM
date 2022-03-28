@@ -19,13 +19,22 @@ else
 
 <UpdateModal @ref="updateModal"></UpdateModal>
 <DeleteUserModal @ref="deleteUserModal"></DeleteUserModal>
-
+<div class="form-outline mb-4">
+            <div class="form-notch">
+              <div class="form-notch-leading" style="width: 9px;"></div>
+              <div class="form-notch-middle" style="width: 47.2px;"></div>
+              <div class="form-notch-trailing"></div>
+            </div>
+          </div>
+ <div class="input-group mb-4">
+                <input @bind="filter" type="text" class="form-control" placeholder="Введите имя, фамилию, почту..." aria-label="Recipient's username" aria-describedby="button-addon2" />
+                <button @onclick="UsersWithFilter" class="btn btn-outline-primary" type="button" id="button-addon2" data-mdb-ripple-color="dark">Найти</button>
+            </div>
 <div id="datatable" class="datatable">
     <div class="datatable-inner table-responsive ps" style="overflow: auto; position: relative;">
         <table class="table datatable-table">
             <thead class="datatable-header">
                 <tr>
-
                     <th style="cursor: pointer;" scope="col">Логин</th>
                     <th style="cursor: pointer;" scope="col">Почта</th>
                     <th style="cursor: pointer;" scope="col">Роль</th>
@@ -76,12 +85,20 @@ else
 }
 
 @code{
+    public string filter;
     private UpdateModal updateModal { get; set; }
     private DeleteUserModal deleteUserModal { get; set; }
     private UserListModel userList;
     private bool loading;
     private string name;
     private bool show = false;
+    private async Task UsersWithFilter()
+    {
+        loading = true;
+        userList = await managerService.GetAllUser(filter);
+        loading = false;
+    }
+
     protected override async Task OnInitializedAsync()
     {
         loading = true;
