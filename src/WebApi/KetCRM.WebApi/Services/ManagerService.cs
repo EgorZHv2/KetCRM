@@ -32,7 +32,7 @@ namespace KetCRM.Identity.Services
                                Surname = userItem.Surname,
                                Patronymic = userItem.Patronymic,
                                Login = userItem.UserName,
-                               LastLogin = (userItem.LastLogin).ToString(),
+                               LastLogin = (userItem.LastLogin).ToString("G"),
                                Email = userItem.Email,
                            }).ToList();
 

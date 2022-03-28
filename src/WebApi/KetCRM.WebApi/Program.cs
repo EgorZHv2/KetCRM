@@ -3,6 +3,7 @@ using KetCRM.Identity;
 using KetCRM.Identity.Models;
 using KetCRM.Identity.Seeds;
 using KetCRM.Identity.Services;
+using KetCRM.Infrastructure.Shared.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -31,7 +32,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
-        .AddDefaultTokenProviders();
+        .AddDefaultTokenProviders()
+        .AddErrorDescriber<RussianIdentityErrorDescriber>();
 
 builder.Services.AddScoped<IManagerService, ManagerService>();
 
