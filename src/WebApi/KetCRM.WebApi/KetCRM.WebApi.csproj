@@ -22,8 +22,4 @@
     <ProjectReference Include="..\..\Infrastructure\KetCRM.Infrastructure.Persistence\KetCRM.Infrastructure.Persistence.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Student\" />
-  </ItemGroup>
-
 </Project>

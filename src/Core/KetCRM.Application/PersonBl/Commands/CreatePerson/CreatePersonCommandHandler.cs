@@ -26,6 +26,7 @@ public class CreatePersonCommandHandler:IRequestHandler<CreatePersonCommand,int>
         };
         await _dbContext.Persons.AddAsync(person, cancellationToken);
         await _dbContext.SaveChangesAsync(cancellationToken);
+        
         return person.Id;
     }
 }

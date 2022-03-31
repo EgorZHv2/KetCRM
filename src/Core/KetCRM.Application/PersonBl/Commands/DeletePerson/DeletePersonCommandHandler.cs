@@ -26,6 +26,7 @@ namespace KetCRM.Application.PersonBl.Commands.DeletePerson
             }
             _dbContext.Persons.Remove(entity);
             await _dbContext.SaveChangesAsync(cancellationToken);
+            
             return Unit.Value;
         }
     }

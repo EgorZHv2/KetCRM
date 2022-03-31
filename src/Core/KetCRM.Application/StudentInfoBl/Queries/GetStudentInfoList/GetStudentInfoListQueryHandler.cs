@@ -9,24 +9,24 @@ using MediatR;
 using KetCRM.Application.Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace KetCRM.Application.StudentBl.Queries.GetStudentList
+namespace KetCRM.Application.StudentInfoBl.Queries.GetStudentInfoList
 {
-   public class GetStudentListQueryHandler:IRequestHandler<GetStudentListQuery,StudentListVm>
+    public class GetStudentInfoListQueryHandler : IRequestHandler<GetStudentInfoListQuery, StudentInfoListVm>
     {
         private readonly IMapper _mapper;
         private readonly IApplicationDbContext _dbcontext;
 
-        public GetStudentListQueryHandler(IApplicationDbContext dbContext, IMapper mapper)
+        public GetStudentInfoListQueryHandler(IApplicationDbContext dbContext, IMapper mapper)
         {
             _mapper = mapper;
             _dbcontext = dbContext;
         }
-        public async Task<StudentListVm> Handle(GetStudentListQuery request, CancellationToken cancellationToken)
+        public async Task<StudentInfoListVm> Handle(GetStudentInfoListQuery request, CancellationToken cancellationToken)
         {
             var empQuery = await _dbcontext.StudentInfos
-                .ProjectTo<StudentItemDto>(_mapper.ConfigurationProvider)
+                .ProjectTo<StudentInfoItemDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
-            return new StudentListVm { Lists = empQuery };
+            return new StudentInfoListVm { Lists = empQuery };
 
         }
     }

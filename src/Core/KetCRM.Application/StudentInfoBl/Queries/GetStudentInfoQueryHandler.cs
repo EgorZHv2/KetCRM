@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KetCRM.Application.StudentBl.Commands.DeleteStudent
+namespace KetCRM.Application.StudentInfoBl.Queries
 {
-    public class DeleteStudentCommand
+    public class GetStudentInfoQueryHandler
     {
     }
 }

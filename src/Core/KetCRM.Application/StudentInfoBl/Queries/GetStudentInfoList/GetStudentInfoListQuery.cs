@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace KetCRM.Application.StudentBl.Queries.GetStudentList
+namespace KetCRM.Application.StudentInfoBl.Queries.GetStudentInfoList
 {
-    public class GetStudentListQuery: IRequest<StudentListVm>
+    public class GetStudentInfoListQuery : IRequest<StudentInfoListVm>
     {
     }
 }

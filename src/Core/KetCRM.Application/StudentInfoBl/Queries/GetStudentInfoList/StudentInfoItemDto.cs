@@ -7,9 +7,9 @@ using AutoMapper;
 using KetCRM.Application.Common.Mapping;
 using KetCRM.Domain.Entities;
 
-namespace KetCRM.Application.StudentBl.Queries.GetStudentList
+namespace KetCRM.Application.StudentInfoBl.Queries.GetStudentInfoList
 {
-    public class StudentItemDto: IMapFrom<StudentInfo>
+    public class StudentInfoItemDto : IMapFrom<StudentInfo>
     {
         public int Id { get; set; }
         public int? StudiedLanguageId { get; set; }
@@ -36,7 +36,7 @@ namespace KetCRM.Application.StudentBl.Queries.GetStudentList
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<StudentInfo, StudentItemDto>()
+            profile.CreateMap<StudentInfo, StudentInfoItemDto>()
                 .ForMember(empDto => empDto.Id,
                 opt => opt.MapFrom(emp => emp.Id))
                 .ForMember(empDto => empDto.StudiedLanguageId,
