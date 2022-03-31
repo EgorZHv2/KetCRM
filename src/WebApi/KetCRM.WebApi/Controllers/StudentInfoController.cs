@@ -1,5 +1,6 @@
 ﻿using KetCRM.Application;
 using KetCRM.Application.StudentInfoBl.Queries;
+using KetCRM.Application.StudentInfoBl.Queries.GetStudentInfoList;
 using KetCRM.Application.StudentInfoBl.Commands.CreateStudentInfo;
 using KetCRM.Application.StudentInfoBl.Commands.DeleteStudentInfo;
 using KetCRM.Application.StudentInfoBl.Commands.UpdateStudentInfo;
@@ -7,7 +8,7 @@ using KetCRM.WebApi.Models.StudentInfo;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
-using KetCRM.Application.StudentInfoBl.Queries.GetStudentInfoList;
+
 
 namespace KetCRM.WebApi.Controllers
 {
