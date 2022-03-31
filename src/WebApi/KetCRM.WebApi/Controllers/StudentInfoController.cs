@@ -11,7 +11,7 @@ using KetCRM.Application.StudentInfoBl.Queries.GetStudentInfoList;
 
 namespace KetCRM.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class StudentInfoController : ApiControllerBase
     {
@@ -20,6 +20,13 @@ namespace KetCRM.WebApi.Controllers
         public StudentInfoController(IMapper mapper)
         {
             _mapper = mapper;
+        }
+        [HttpGet]
+        public async Task<ActionResult<StudentInfoItemDto>> GetOne(int id)
+        {
+            var query = new GetStudentInfoQuery() { Id = id };
+            var vm = await Mediator.Send(query);
+            return Ok(vm);
         }
         [HttpGet]
         public async Task<ActionResult<StudentInfoListVm>> GetAll()
