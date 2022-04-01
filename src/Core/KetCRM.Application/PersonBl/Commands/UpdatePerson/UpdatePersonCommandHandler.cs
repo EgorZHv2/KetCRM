@@ -26,6 +26,20 @@ namespace KetCRM.Application.PersonBl.Commands.UpdatePerson
             person.Name = request.Name;
             person.Surname = request.Surname;
             person.Patronymic = request.Patronymic;
+            person.Gender = request.Gender;
+            person.BirthDate = request.BirthDate;
+            person.PersonType = request.PersonType;
+            person.EmailAddress = request.EmailAddress;
+            person.PhoneNumber = request.PhoneNumber;
+            person.SNILS = request.SNILS;
+            person.InsuranceNumber = request.InsuranceNumber;
+            person.PassportSeries = request.PassportSeries;
+            person.PassportNumber = request.PassportNumber;
+            person.PassportDate = request.PassportDate;
+            person.PassportPlace = request.PassportPlace;
+            person.Comment = request.Comment;
+
+             
             await _dbContext.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }

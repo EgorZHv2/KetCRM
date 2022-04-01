@@ -24,10 +24,10 @@ namespace KetCRM.Application.StudentInfoBl.Commands.UpdateStudentInfo
         public bool? OnABudget { get; set; }
         public bool? TargetedEducation { get; set; }
         
-        public int? PersonId { get; set; }
+        public int PersonId { get; set; }
         public int? SchoolEducationTypeId { get; set; }
         public string? OlimpiadeWinner { get; set; }
-        public string? WorkExperience { get; set; }
+        public int? WorkExperience { get; set; }
         public int? StudentStatusId { get; set; }
         public string? StudentCerteficateNumber { get; set; }
         public string? StudentCardNumber { get; set; }

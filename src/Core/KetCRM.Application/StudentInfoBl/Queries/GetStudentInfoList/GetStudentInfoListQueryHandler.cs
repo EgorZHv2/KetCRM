@@ -23,9 +23,7 @@ namespace KetCRM.Application.StudentInfoBl.Queries.GetStudentInfoList
         }
         public async Task<StudentInfoListVm> Handle(GetStudentInfoListQuery request, CancellationToken cancellationToken)
         {
-            var empQuery = await _dbcontext.StudentInfos
-                .ProjectTo<StudentInfoItemDto>(_mapper.ConfigurationProvider)
-                .ToListAsync(cancellationToken);
+            var empQuery = await _dbcontext.StudentInfos.ProjectTo<StudentInfoItemDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
             return new StudentInfoListVm { Lists = empQuery };
 
         }

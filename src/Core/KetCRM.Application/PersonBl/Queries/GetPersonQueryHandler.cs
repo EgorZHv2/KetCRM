@@ -50,7 +50,7 @@ namespace KetCRM.Application.PersonBl.Queries
                 PassportDate = entity.PassportDate,
                 PassportPlace = entity.PassportPlace,
                 Comment = entity.Comment,
-                Photo = entity.Photo
+
             };
         }
     }

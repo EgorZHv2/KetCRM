@@ -27,8 +27,29 @@ namespace KetCRM.Application.StudentInfoBl.Commands.UpdateStudentInfo
             {
                 throw new NotFoundException(nameof(StudentInfo), request.Id);
             }
-            studentinfo.PersonId = request.PersonId;
+            studentinfo.StudiedLanguageId = request.StudiedLanguageId;
             studentinfo.Dormitory = request.Dormitory;
+            studentinfo.HasTwo = request.HasTwo;
+            studentinfo.SchoolCertificateNumber = request.SchoolCertificateNumber;
+            studentinfo.YearOfReleaseFromSchool = request.YearOfReleaseFromSchool;
+            studentinfo.HasMedal = request.HasMedal;
+            studentinfo.GraduatedSchool = request.GraduatedSchool;
+            studentinfo.SchoolTypeId = request.SchoolTypeId;
+            studentinfo.OnABudget = request.OnABudget;
+            studentinfo.TargetedEducation = request.TargetedEducation;
+            studentinfo.PersonId = request.PersonId;
+            studentinfo.SchoolEducationTypeId = request.SchoolEducationTypeId;
+            studentinfo.OlimpiadeWinner = request.OlimpiadeWinner;
+            studentinfo.WorkExperience = request.WorkExperience;
+            studentinfo.StudentStatusId = request.StudentStatusId;
+            studentinfo.StudentCerteficateNumber = request.StudentCerteficateNumber;
+            studentinfo.StudentCardNumber = request.StudentCardNumber;
+            studentinfo.StudentRecordBookNumber = request.StudentRecordBookNumber;
+            studentinfo.PassCardNumber = request.PassCardNumber;
+            studentinfo.NeedIssuePassCard = request.NeedIssuePassCard;
+
+
+
             await _dbContext.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }

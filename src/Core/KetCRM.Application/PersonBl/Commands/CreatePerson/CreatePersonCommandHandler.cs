@@ -22,7 +22,21 @@ public class CreatePersonCommandHandler:IRequestHandler<CreatePersonCommand,int>
         {
             Name = request.Name,
             Surname = request.Surname,
-            Patronymic = request.Patronymic
+            Patronymic = request.Patronymic,
+            Gender = request.Gender,
+            BirthDate = request.BirthDate,
+            PersonType = request.PersonType,
+            EmailAddress = request.EmailAddress,
+            PhoneNumber = request.PhoneNumber,
+            SNILS = request.SNILS,
+            InsuranceNumber = request.InsuranceNumber,
+            PassportSeries = request.PassportSeries,
+            PassportNumber = request.PassportNumber,
+            PassportDate = request.PassportDate,
+            PassportPlace = request.PassportPlace,
+            Comment = request.Comment
+
+            
         };
         await _dbContext.Persons.AddAsync(person, cancellationToken);
         await _dbContext.SaveChangesAsync(cancellationToken);

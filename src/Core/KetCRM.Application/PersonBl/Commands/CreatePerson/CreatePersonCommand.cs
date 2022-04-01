@@ -10,12 +10,12 @@ namespace KetCRM.Application.PersonBl.Commands.CreatePerson;
 
 public class CreatePersonCommand:IRequest<int>
 {
-    [Required]
-    public string Name { get; set; }
-    [Required]
-    public string Surname { get; set; }
+    
+    public string? Name { get; set; }
+    
+    public string? Surname { get; set; }
    
-    public string Patronymic { get; set; }
+    public string? Patronymic { get; set; }
    
     public string? Gender { get; set; }
    
@@ -41,6 +41,6 @@ public class CreatePersonCommand:IRequest<int>
     
     public string? Comment { get; set; }
     
-    public byte[]? Photo { get; set; }
+    
 
 }

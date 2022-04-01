@@ -27,7 +27,6 @@ namespace KetCRM.Application.PersonBl.Queries.GetPersonList
         public DateTime? PassportDate { get; set; }
         public string? PassportPlace { get; set; }
         public string? Comment { get; set; }
-        public byte[]? Photo { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -63,9 +62,8 @@ namespace KetCRM.Application.PersonBl.Queries.GetPersonList
                 .ForMember(empDto => empDto.PassportPlace,
                 opt => opt.MapFrom(emp => emp.PassportPlace))
                 .ForMember(empDto => empDto.Comment,
-                opt => opt.MapFrom(emp => emp.Comment))
-                .ForMember(empDto => empDto.Photo,
-                opt => opt.MapFrom(emp => emp.Photo));
+                opt => opt.MapFrom(emp => emp.Comment));
+ 
 
 
 

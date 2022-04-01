@@ -20,8 +20,27 @@ namespace KetCRM.Application.StudentInfoBl.Commands.CreateStudentInfo
         {
             var student = new StudentInfo
             {
+                StudiedLanguageId = request.StudiedLanguageId,
+                Dormitory = request.Dormitory,
+                GroupId = request.GroupId,
+                HasTwo = request.HasTwo,
+                SchoolCertificateNumber = request.SchoolCertificateNumber,
+                YearOfReleaseFromSchool = request.YearOfReleaseFromSchool,
+                HasMedal = request.HasMedal,
+                GraduatedSchool = request.GraduatedSchool,
+                SchoolTypeId = request.SchoolTypeId,
+                OnABudget = request.OnABudget,
+                TargetedEducation = request.TargetedEducation,
                 PersonId = request.PersonId,
-                Dormitory = request.Dormitory
+                SchoolEducationTypeId = request.SchoolEducationTypeId,
+                OlimpiadeWinner = request.OlimpiadeWinner,
+                WorkExperience = request.WorkExperience,
+                StudentStatusId = request.StudentStatusId,
+                StudentCerteficateNumber = request.StudentCerteficateNumber,
+                StudentCardNumber = request.StudentCardNumber,
+                StudentRecordBookNumber = request.StudentRecordBookNumber,
+                PassCardNumber = request.PassCardNumber,
+                NeedIssuePassCard = request.NeedIssuePassCard
             };
             await _dbcontext.StudentInfos.AddAsync(student, cancellationToken);
             await _dbcontext.SaveChangesAsync(cancellationToken);
