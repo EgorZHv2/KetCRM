@@ -17,7 +17,7 @@ namespace KetCRM.Domain.Entities
         public int? SchoolTypeId { get; set; }
         public bool? OnABudget { get; set; }
         public bool? TargetedEducation { get; set; }
-        public int? PersonId { get; set; }
+        public int PersonId { get; set; }
         public int? SchoolEducationTypeId { get; set; }
         public string? OlimpiadeWinner { get; set; }
         public string? WorkExperience { get; set; }
