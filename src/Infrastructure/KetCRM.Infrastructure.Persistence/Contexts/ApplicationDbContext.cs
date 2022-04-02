@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using KetCRM.Application.Common.Interfaces;
 using KetCRM.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace KetCRM.Infrastructure.Persistence.Contexts
 {
-    public partial class KetCrmDbDataContext : DbContext
+    public partial class ApplicationDbContext :  DbContext, IApplicationDbContext
     {
-        public KetCrmDbDataContext()
+        public ApplicationDbContext()
         {
         }
 
-        public KetCrmDbDataContext(DbContextOptions<KetCrmDbDataContext> options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
@@ -35,7 +36,6 @@ namespace KetCRM.Infrastructure.Persistence.Contexts
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=KetCrmDb.Data;Trusted_Connection=True;");
             }
         }

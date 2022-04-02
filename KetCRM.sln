@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KetCRM.BlazorClient", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KetCRM.Identity", "src\WebApi\KetCRM.Identity\KetCRM.Identity.csproj", "{D50E6561-147D-4EF6-A3E4-0297FAE6B0BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KetCRM.Main", "src\WebApi\KetCRM.Main\KetCRM.Main.csproj", "{8EB77108-8C48-47B9-9383-985F53F78824}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{D50E6561-147D-4EF6-A3E4-0297FAE6B0BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D50E6561-147D-4EF6-A3E4-0297FAE6B0BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D50E6561-147D-4EF6-A3E4-0297FAE6B0BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EB77108-8C48-47B9-9383-985F53F78824}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EB77108-8C48-47B9-9383-985F53F78824}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EB77108-8C48-47B9-9383-985F53F78824}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EB77108-8C48-47B9-9383-985F53F78824}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{DF7ACB30-C5B4-4568-809D-2EA5D95026B9} = {0DAB406F-E0DF-456A-AA4A-5B24A1C60930}
 		{C000558B-64BE-4E6F-B71D-D6960451DC3A} = {DF7ACB30-C5B4-4568-809D-2EA5D95026B9}
 		{D50E6561-147D-4EF6-A3E4-0297FAE6B0BF} = {9A0D8DBB-019D-41C1-BF77-2725E5D4E504}
+		{8EB77108-8C48-47B9-9383-985F53F78824} = {9A0D8DBB-019D-41C1-BF77-2725E5D4E504}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A807EBC1-327D-4E3D-A3A4-679A55C4C4FF}
