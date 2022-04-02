@@ -50,7 +50,7 @@ else
 
                 foreach (var item in userList.Lists)
                 {
-                <tr @key="item.Login" scope="row" data-mdb-index="0">
+                <tr @onchange="UpdateTable" @key="item.Login" scope="row" data-mdb-index="0">
                     <td data-mdb-field="field_1" false="">@item.Login</td>
                     <td data-mdb-field="field_2" false="">@item.Email</td>
                     <td data-mdb-field="field_3" false="">@item.Roles</td>
@@ -96,7 +96,10 @@ else
         userList = await managerService.GetAllUser(filter);
         loading = false;
     }
-
+    private async Task UpdateTable(ChangeEventArgs e)
+    {
+        userList = await managerService.GetAllUser(filter);
+    }
     protected override async Task OnInitializedAsync()
     {
         loading = true;
