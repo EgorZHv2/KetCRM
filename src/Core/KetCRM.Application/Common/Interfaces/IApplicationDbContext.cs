@@ -24,6 +24,6 @@ namespace KetCRM.Application.Common.Interfaces
         DbSet<StudentStatus> StudentStatuses { get; set; }
         DbSet<StudiedLanguage> StudiedLanguages { get; set; }
 
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+        Task<int> SaveChangesAsync();
     }
 }

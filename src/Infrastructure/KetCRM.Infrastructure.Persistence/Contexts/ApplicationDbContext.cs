@@ -275,5 +275,9 @@ namespace KetCRM.Infrastructure.Persistence.Contexts
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        public async Task<int> SaveChangesAsync()
+        {
+            return await base.SaveChangesAsync();
+        }
     }
 }
