@@ -27,22 +27,47 @@ namespace KetCRM.Application.StudentBl.Queries.GetStudentList
             StudentListVm output = new StudentListVm();
             foreach(var s in _dbcontext.StudentInfos)
             {
-                var p = await _dbcontext.Persons.FindAsync(new object[] { s.PersonId }, cancellationToken);
+                var entity = await _dbcontext.Persons.FindAsync(new object[] { s.PersonId }, cancellationToken);
+                var studentinfo = await _dbcontext.StudentInfos.FindAsync(new object[] { s.PersonId }, cancellationToken);
                 output.Lists.Add(new StudentItemDto
                 {
-                    Name = p.Name,
-                    Surname = p.Surname,
-                    Patronymic = p.Patronymic,
-                    Gender = p.Gender,
-                    BirthDate = p.BirthDate,
-                    PassportSeries = p.PassportSeries,
-                    PassportNumber = p.PassportNumber,
+                    Id = entity.Id,
+                    Name = entity.Name,
+                    Surname = entity.Surname,
+                    Patronymic = entity.Patronymic,
+                    Gender = entity.Gender,
+                    BirthDate = entity.BirthDate,
+                    PersonType = entity.PersonType,
+                    EmailAddress = entity.EmailAddress,
+                    PhoneNumber = entity.PhoneNumber,
+                    SNILS = entity.SNILS,
+                    InsuranceNumber = entity.InsuranceNumber,
+                    PassportSeries = entity.PassportSeries,
+                    PassportNumber = entity.PassportNumber,
+                    PassportDate = entity.PassportDate,
+                    PassportPlace = entity.PassportPlace,
+                    Comment = entity.Comment,
+                    StudiedLanguageId = s.StudiedLanguageId,
+                    Dormitory = s.Dormitory,
                     GroupId = s.GroupId,
+                    HasTwo = s.HasTwo,
+                    SchoolCertificateNumber = s.SchoolCertificateNumber,
+                    YearOfReleaseFromSchool = s.YearOfReleaseFromSchool,
+                    HasMedal = s.HasMedal,
+                    GraduatedSchool = s.GraduatedSchool,
+                    SchoolTypeId = s.SchoolTypeId,
                     OnABudget = s.OnABudget,
                     TargetedEducation = s.TargetedEducation,
-                    StudiedLanguageId = s.StudiedLanguageId,
-                    HasTwo = s.HasTwo,
-                    HasMedal = s.HasMedal
+                    PersonId = s.PersonId,
+                    SchoolEducationTypeId = s.SchoolEducationTypeId,
+                    OlimpiadeWinner = s.OlimpiadeWinner,
+                    WorkExperience = s.WorkExperience,
+                    StudentStatusId = s.StudentStatusId,
+                    StudentCerteficateNumber = s.StudentCerteficateNumber,
+                    StudentCardNumber = s.StudentCardNumber,
+                    StudentRecordBookNumber = s.StudentRecordBookNumber,
+                    PassCardNumber = s.PassCardNumber,
+                    NeedIssuePassCard = s.NeedIssuePassCard
 
 
                 }) ;
